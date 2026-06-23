@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>质量经理手册 · 专题八：可靠性四步法</title>
+<style>
+:root{--bg:#f0f4ff;--paper:#fff;--ink:#1a2332;--muted:#5a6a7e;--line:#dce3f0;--blue:#2563eb;--cyan:#0ea5e9;--green:#16a34a;--orange:#f59e0b;--red:#ef4444;--purple:#7c3aed;--pink:#d63384;--radius:10px;--max:1200px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:var(--max);margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700}
+.brand-title{font-size:15px;font-weight:700;color:var(--ink)}
+.brand-sub{font-size:12px;color:var(--muted);margin-left:6px}
+.top-links{display:flex;gap:4px}
+.top-links a{padding:6px 12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;transition:all .15s}
+.top-links a:hover{background:#e8f0fe;color:var(--blue)}
+.hero{max-width:var(--max);margin:0 auto;padding:48px 28px 32px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:stretch}
+.hero h1{margin:0;font-size:clamp(34px,5vw,56px);line-height:1.08;color:var(--ink);letter-spacing:-.5px}
+.hero-lead{color:#475569;font-size:17px;margin-top:18px;max-width:640px;line-height:1.7}
+.hero-board{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px rgba(37,99,235,.06);padding:20px;display:flex;flex-direction:column;justify-content:center}
+.keyword-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.keyword-card{background:#f8faff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;transition:transform .15s}
+.keyword-card:hover{transform:translateY(-2px);border-color:#bfdbfe}
+.keyword-card .kw{font-size:20px;font-weight:800;line-height:1}
+.keyword-card .kw-sub{font-size:12px;font-weight:700;color:var(--ink);margin-top:6px}
+.keyword-card .kw-desc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+.main-layout{max-width:820px;margin:0 auto;padding:16px 28px 64px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 32px;margin-bottom:20px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
+.section-num{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px}
+h2{margin:0 0 14px;font-size:clamp(24px,3vw,32px);line-height:1.15;color:var(--ink)}
+h3{margin:22px 0 10px;font-size:19px;color:var(--ink)}
+p{margin:10px 0;color:#334155}
+ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
+.hl{display:inline-block;padding:1px 8px;border-radius:6px;background:#dbeafe;color:var(--blue);font-weight:700;font-size:.95em}
+.hl.green{background:#dcfce7;color:var(--green)}
+.hl.orange{background:#fef3c7;color:#b45309}
+.hl.purple{background:#ede9fe;color:var(--purple)}
+.hl.red{background:#fee2e2;color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.card{border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:#fafbff}
+.card h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
+.card p{margin:0;font-size:13px;color:#475569;line-height:1.5}
+.callout{margin:16px 0;padding:14px 16px;border-left:4px solid var(--blue);background:#eff6ff;border-radius:0 8px 8px 0;font-size:14px;color:#1e3a5f;font-weight:600;line-height:1.6}
+.callout.warn{border-left-color:var(--orange);background:#fffbeb;color:#78350f}
+.quiz-section{background:var(--paper);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
+.quiz-section .quiz-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.quiz-section h2{font-size:18px;font-weight:700;color:var(--pink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #fce7f3}
+.question{background:#fafbff;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:14px}
+.question-header{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:6px;vertical-align:middle}
+.badge-multi{background:#fce7f3;color:var(--pink)}
+.badge-single{background:#dcfce7;color:var(--green)}
+.option-label{display:flex;align-items:flex-start;padding:7px 0;cursor:pointer;font-size:14px;color:#334155}
+.option-label input{margin-top:3px;margin-right:10px;accent-color:var(--blue);width:16px;height:16px;flex-shrink:0}
+.submit-wrap{text-align:center;margin:20px 0}
+.submit-btn{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .2s}
+.submit-btn:hover{opacity:.9}
+.result{display:none;margin-top:20px}
+.score-bar{background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
+.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
+.result-correct{background:#dcfce7;border:1px solid #86efac}
+.result-wrong{background:#fee2e2;border:1px solid #fca5a5}
+.footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
+.footer .sign{font-size:13px;color:#64748b;margin-top:6px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.cards,.keyword-grid{grid-template-columns:1fr}.top-links{display:none}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+<div class="topbar-inner">
+<a class="brand" href="#top">
+<div class="brand-mark">质</div>
+<span><span class="brand-title">质量经理手册</span><span class="brand-sub">专题八：可靠性四步法</span></span>
+</a>
+<nav class="top-links">
+<a href="#s1">四步法概述</a>
+<a href="#s2">技术五归零</a>
+<a href="#s3">管理五归零</a>
+<a href="#quiz">练习题</a>
+</nav>
+</div>
+</header>
+
+<section class="hero" id="top">
+<div>
+<h1>可靠性四步法</h1>
+<p class="hero-lead">可靠性工程是一门与故障做斗争的学科，核心方法是<span class="hl orange">预防、发现、纠正、验证</span>四步法。这是注册质量经理考试的<span class="hl red">重要考点</span>。</p>
+</div>
+<div class="hero-board">
+<div class="keyword-grid">
+<div class="keyword-card"><div class="kw" style="color:var(--green)">预防</div><div class="kw-sub">最重要</div><div class="kw-desc">第一次就把事情做正确</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--blue)">发现</div><div class="kw-sub">尽早暴露</div><div class="kw-desc">发现得越早损失越小</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--orange)">纠正</div><div class="kw-sub">归零管理</div><div class="kw-desc">技术五归零+管理五归零</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--purple)">验证</div><div class="kw-sub">确保有效</div><div class="kw-desc">防止"小改出大错"</div></div>
+</div>
+</div>
+</section>
+
+<main class="main-layout">
+
+<section class="panel" id="s1">
+<div class="section-num">9.1.1</div>
+<h2>可靠性四步法概述</h2>
+
+<div class="cards">
+<div class="card"><h4>1. 预防</h4><p><span class="hl green">最重要的一步</span>，是可靠性工程的核心。体现克劳士比"第一次就把事情做正确"的思想。方法：FMEA、FTA、可靠性设计准则等。</p></div>
+<div class="card"><h4>2. 发现</h4><p><span class="hl">尽早暴露缺陷</span>，发现得越早损失越小。方法：FMECA、FTA、可靠性评审、环境应力筛选、可靠性增长试验等。</p></div>
+<div class="card"><h4>3. 纠正</h4><p>发现缺陷不是目的，解决缺陷才是目的。采用<span class="hl orange">故障归零管理</span>：技术五归零+管理五归零。</p></div>
+<div class="card"><h4>4. 验证</h4><p>纠正措施制定后必须经过工程验证，要防止<span class="hl purple">"小改出大错"</span>。方法：可靠性鉴定试验、验收试验、加速寿命试验。</p></div>
+</div>
+
+<div class="callout">核心理念：<span class="hl green">预防</span>是可靠性工程的核心，体现了"第一次就把事情做正确"的思想。</div>
+</section>
+
+<section class="panel" id="s2">
+<div class="section-num">9.1.2</div>
+<h2>技术五归零</h2>
+
+<div class="cards">
+<div class="card"><h4>1. 定位准确</h4><p>准确定位故障发生的位置和范围</p></div>
+<div class="card"><h4>2. 机理清楚</h4><p>清楚分析故障发生的机理和原因</p></div>
+<div class="card"><h4>3. 问题复现</h4><p>能够通过试验复现故障现象</p></div>
+<div class="card"><h4>4. 措施有效</h4><p>采取的纠正措施必须经过验证有效</p></div>
+<div class="card"><h4>5. 举一反三</h4><p>类似问题要举一反三，防止再发生</p></div>
+</div>
+
+<div class="callout warn">⚠️ 考试高频陷阱：技术五归零<span class="hl red">不包含</span>"责任明确"。"责任明确"属于管理五归零。</div>
+</section>
+
+<section class="panel" id="s3">
+<div class="section-num">9.1.3</div>
+<h2>管理五归零</h2>
+
+<div class="cards">
+<div class="card"><h4>1. 过程清楚</h4><p>清楚描述问题发生的全过程</p></div>
+<div class="card"><h4>2. 责任明确</h4><p>明确相关责任人和责任部门</p></div>
+<div class="card"><h4>3. 措施落实</h4><p>管理措施要落实到位</p></div>
+<div class="card"><h4>4. 严肃处理</h4><p>对责任人和责任部门要严肃处理</p></div>
+<div class="card"><h4>5. 完善规章</h4><p>完善相关规章制度，防止再发生</p></div>
+</div>
+
+<div class="callout">技术五归零 vs 管理五归零：<span class="hl">技术五归零</span>关注技术问题，<span class="hl green">管理五归零</span>关注管理问题。"责任明确"属于管理五归零。</div>
+</section>
+
+<section class="panel quiz-section" id="quiz">
+<div class="quiz-title">练习题</div>
+<h2>互动练习题（5道）</h2>
+
+<div class="question" data-id="q0" data-answer="C" data-type="single">
+<div class="question-header">第1题：可靠性工程斗争过程中最重要的一步是？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q0" value="A"><span>A. 发现</span></label>
+<label class="option-label"><input type="radio" name="q0" value="B"><span>B. 纠正</span></label>
+<label class="option-label"><input type="radio" name="q0" value="C"><span>C. 预防</span></label>
+<label class="option-label"><input type="radio" name="q0" value="D"><span>D. 验证</span></label>
+</div>
+
+<div class="question" data-id="q1" data-answer="ABDE" data-type="multi">
+<div class="question-header">第2题：故障归零管理中，技术五归零包括哪些？<span class="badge badge-multi">多选</span></div>
+<label class="option-label"><input type="checkbox" name="q1" value="A"><span>A. 定位准确</span></label>
+<label class="option-label"><input type="checkbox" name="q1" value="B"><span>B. 机理清楚</span></label>
+<label class="option-label"><input type="checkbox" name="q1" value="C"><span>C. 责任明确</span></label>
+<label class="option-label"><input type="checkbox" name="q1" value="D"><span>D. 问题复现</span></label>
+<label class="option-label"><input type="checkbox" name="q1" value="E"><span>E. 举一反三</span></label>
+</div>
+
+<div class="question" data-id="q2" data-answer="C" data-type="single">
+<div class="question-header">第3题：以下哪项属于管理五归零，不属于技术五归零？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q2" value="A"><span>A. 定位准确</span></label>
+<label class="option-label"><input type="radio" name="q2" value="B"><span>B. 机理清楚</span></label>
+<label class="option-label"><input type="radio" name="q2" value="C"><span>C. 责任明确</span></label>
+<label class="option-label"><input type="radio" name="q2" value="D"><span>D. 问题复现</span></label>
+</div>
+
+<div class="question" data-id="q3" data-answer="B" data-type="single">
+<div class="question-header">第4题：关于可靠性技术与管理的关系，以下说法正确的是？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 技术比管理更重要</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 技术与管理是"一部车子的两个轮子，缺一不可"</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 管理比技术更重要</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 技术与管理互不相关</span></label>
+</div>
+
+<div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
+<div class="question-header">第5题：可靠性四步法包括？<span class="badge badge-multi">多选</span></div>
+<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 预防</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 发现</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 纠正</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 验证</span></label>
+</div>
+
+<div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+<div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+</section>
+
+</main>
+
+<footer class="footer"><p>© 质量经理手册互动练习</p><div class="sign">⚡ 与你同行 AI 浪潮，打造智能工作新范式</div></footer>
+
+<script>
+var explanations={
+q0:"教材原文：可靠性工程斗争过程中最重要的一步是预防。预防是可靠性工程的核心，体现了克劳士比'第一次就把事情做正确'的思想。",
+q1:"教材原文：技术五归零包括：定位准确、机理清楚、问题复现、措施有效、举一反三。'责任明确'属于管理五归零，不属于技术五归零。",
+q2:"教材原文：'责任明确'属于管理五归零，不属于技术五归零。技术五归零包括：定位准确、机理清楚、问题复现、措施有效、举一反三。",
+q3:"教材原文：有人把可靠性技术与管理形容为'一部车子的两个轮子，缺一不可'。技术与管理同等重要，相互依存。",
+q4:"教材原文：可靠性四步法包括：预防、发现、纠正、验证。这是可靠性工程的核心方法。"
+};
+var questions=[
+{id:'q0',text:'可靠性工程斗争过程中最重要的一步是什么？'},
+{id:'q1',text:'故障归零管理中，技术五归零包括哪些？'},
+{id:'q2',text:'以下哪项属于管理五归零，不属于技术五归零？'},
+{id:'q3',text:'关于可靠性技术与管理的关系，以下说法正确的是？'},
+{id:'q4',text:'可靠性四步法包括哪些？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>
