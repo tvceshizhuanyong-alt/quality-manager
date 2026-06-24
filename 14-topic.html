@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>质量经理手册 · Day 14：管理评审（高频）</title>
+<style>
+:root{--bg:#f0f4ff;--paper:#fff;--ink:#1a2332;--muted:#5a6a7e;--line:#dce3f0;--blue:#2563eb;--cyan:#0ea5e9;--green:#16a34a;--orange:#f59e0b;--red:#ef4444;--purple:#7c3aed;--pink:#d63384;--radius:10px;--max:1200px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:var(--max);margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700}
+.brand-title{font-size:15px;font-weight:700;color:var(--ink)}
+.brand-sub{font-size:12px;color:var(--muted);margin-left:6px}
+.main-layout{max-width:820px;margin:0 auto;padding:16px 28px 64px}
+.quiz-section{background:var(--paper);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
+.quiz-section .quiz-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.quiz-section h2{font-size:18px;font-weight:700;color:var(--pink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #fce7f3}
+.question{background:#fafbff;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:14px}
+.question-header{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:6px;vertical-align:middle}
+.badge-multi{background:#fce7f3;color:var(--pink)}
+.badge-single{background:#dcfce7;color:var(--green)}
+.option-label{display:flex;align-items:flex-start;padding:7px 0;cursor:pointer;font-size:14px;color:#334155}
+.option-label input{margin-top:3px;margin-right:10px;accent-color:var(--blue);width:16px;height:16px;flex-shrink:0}
+.submit-wrap{text-align:center;margin:20px 0}
+.submit-btn{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .2s}
+.submit-btn:hover{opacity:.9}
+.result{display:none;margin-top:20px}
+.score-bar{background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
+.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
+.result-correct{background:#dcfce7;border:1px solid #86efac}
+.result-wrong{background:#fee2e2;border:1px solid #fca5a5}
+.footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
+.footer .sign{font-size:13px;color:#64748b;margin-top:6px}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+<div class="topbar-inner">
+<a class="brand" href="#">
+<div class="brand-mark">质</div>
+<span><span class="brand-title">质量经理手册</span><span class="brand-sub">Day 14：管理评审（高频）</span></span>
+</a>
+</div>
+</header>
+
+<main class="main-layout">
+<section class="quiz-section">
+<div class="quiz-title">练习题</div>
+<h2>Day 14：管理评审（高频）（5道题）</h2>
+
+<div class="question" data-id="q0" data-answer="C" data-type="single">
+<div class="question-header">第1题：管理评审的输出不包含？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q0" value="A"><span>A. 体系改进决议</span></label>
+<label class="option-label"><input type="radio" name="q0" value="B"><span>B. 资源调整需求</span></label>
+<label class="option-label"><input type="radio" name="q0" value="C"><span>C. 产品出厂检验报告</span></label>
+<label class="option-label"><input type="radio" name="q0" value="D"><span>D. 质量目标更新</span></label>
+</div>
+
+<div class="question" data-id="q1" data-answer="B" data-type="single">
+<div class="question-header">第2题：管理评审由谁主持？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q1" value="A"><span>A. 质量经理</span></label>
+<label class="option-label"><input type="radio" name="q1" value="B"><span>B. 最高管理者</span></label>
+<label class="option-label"><input type="radio" name="q1" value="C"><span>C. 生产主管</span></label>
+<label class="option-label"><input type="radio" name="q1" value="D"><span>D. 外部审核员</span></label>
+</div>
+
+<div class="question" data-id="q2" data-answer="B" data-type="single">
+<div class="question-header">第3题：管理评审的频次通常是？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q2" value="A"><span>A. 每月一次</span></label>
+<label class="option-label"><input type="radio" name="q2" value="B"><span>B. 按计划的时间间隔，通常每年至少一次</span></label>
+<label class="option-label"><input type="radio" name="q2" value="C"><span>C. 每季度一次</span></label>
+<label class="option-label"><input type="radio" name="q2" value="D"><span>D. 随时进行</span></label>
+</div>
+
+<div class="question" data-id="q3" data-answer="ABCD" data-type="single">
+<div class="question-header">第4题：管理评审输入资料包含？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 内审结果</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 客户反馈数据</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 供方绩效</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 上次评审整改跟踪</span></label>
+</div>
+
+<div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
+<div class="question-header">第5题：管理评审输入资料包含？<span class="badge badge-multi">多选</span></div>
+<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 内审结果</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 客户反馈数据</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 供方绩效</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 上次评审整改跟踪</span></label>
+</div>
+
+
+
+<div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+<div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+</section>
+</main>
+
+<footer class="footer">
+<p>© 质量经理手册互动练习</p>
+<div class="sign">⚡ 与你同行 AI 浪潮，打造智能工作新范式</div>
+</footer>
+
+<script>
+var explanations=q0:"管理评审的输出包括：体系改进决议、资源调整需求、质量目标更新。不包含产品出厂检验报告，产品出厂检验报告是日常质量记录。",
+q1:"管理评审由最高管理者亲自主持，不能委托给质量经理或其他人员。",
+q2:"管理评审按计划的时间间隔进行，通常每年至少一次。不是每月或每季度。",
+q3:"管理评审输入资料包含：内审结果、客户反馈数据、供方绩效、上次评审整改跟踪、过程绩效、产品符合性等。",
+q4:"管理评审输入资料包含：内审结果、客户反馈数据、供方绩效、上次评审整改跟踪、过程绩效、产品符合性等。",
+q5:"1. **评审准备**：\n   - 制定管理评审计划\n   - 收集输入资料：\n     - 内审结果\n     - 客户满意度调查\n     - 过程绩效数据\n     - 产品合格率统计\n     - 供应商绩效评价\n     - 上次评审整改跟踪\n\n2. **评审实施**：\n   - 最高管理者主持\n   - 各部门汇报绩效\n   - 讨论问题和改进机会\n   - 形成评审结论\n\n3. **评审输出**：\n   - 体系改进决议\n   - 资源调整需求\n   - 质量目标更新\n   - 改进措施计划\n\n4. **整改跟踪**：\n   - 明确责任人、时间节点\n   - 定期跟踪整改进度\n   - 验证整改效果";
+var questions=[QUESTIONS_JS];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>
