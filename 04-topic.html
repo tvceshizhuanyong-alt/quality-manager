@@ -77,20 +77,20 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 1-1000</span></label>
 </div>
 
-<div class="question" data-id="q3" data-answer="AB" data-type="single">
-<div class="question-header">第4题：以下关于FMEA的说法正确的有？<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q3" value="A"><span>A. DFMEA关注产品设计缺陷</span></label>
-<label class="option-label"><input type="radio" name="q3" value="B"><span>B. PFMEA关注制造过程缺陷</span></label>
-<label class="option-label"><input type="radio" name="q3" value="C"><span>C. FMEA是事后分析工具</span></label>
-<label class="option-label"><input type="radio" name="q3" value="D"><span>D. RPN越高风险越低</span></label>
+<div class="question" data-id="q3" data-answer="ABD" data-type="single">
+<div class="question-header">第4题：以下属于预防成本的项目有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 新品设计评审费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 质量策划费用</span></label>
 </div>
 
-<div class="question" data-id="q4" data-answer="AB" data-type="multi">
-<div class="question-header">第5题：以下关于FMEA的说法正确的有？<span class="badge badge-multi">多选</span></div>
-<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. DFMEA关注产品设计缺陷</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. PFMEA关注制造过程缺陷</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. FMEA是事后分析工具</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. RPN越高风险越低</span></label>
+<div class="question" data-id="q4" data-answer="ABD" data-type="single">
+<div class="question-header">第5题：以下属于质量成本预防成本的有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q4" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="B"><span>B. 质量策划费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q4" value="D"><span>D. 新品设计评审费</span></label>
 </div>
 
 
@@ -109,9 +109,11 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 var explanations=q0:"FMEA（失效模式与影响分析）是识别潜在产品失效风险的核心工具。检查表用于数据收集，甘特图用于项目进度，直方图用于数据分布分析。",
 q1:"RPN（风险顺序数）= S（严重度）× O（发生度）× D（探测度）。三个因子相乘，不是相加或其他组合。",
 q2:"RPN的取值范围是1-1000。每个因子（S、O、D）取值1-10分，三者相乘最大为10×10×10=1000。",
-q3:"DFMEA（设计FMEA）关注产品设计缺陷，PFMEA（过程FMEA）关注制造过程缺陷。FMEA是预防性工具（事前分析），不是事后分析。RPN越高风险越高。",
-q4:"DFMEA（设计FMEA）关注产品设计缺陷，PFMEA（过程FMEA）关注制造过程缺陷。FMEA是预防性工具（事前分析），不是事后分析。RPN越高风险越高。",
-q5:"1. **组建FMEA团队**：跨部门团队（设计、工艺、质量、生产）\n2. **DFMEA分析**：\n   - 识别产品功能要求\n   - 分析潜在失效模式（如断裂、变形、功能失效）\n   - 评估失效后果（严重度S）\n   - 分析失效原因（发生度O）\n   - 评估现行控制措施（探测度D）\n   - 计算RPN = S × O × D\n3. **PFMEA分析**：\n   - 识别制造过程步骤\n   - 分析潜在过程失效（如装配错误、参数偏差）\n   - 评估风险并制定控制措施\n4. **优先改进**：RPN > 100或S ≥ 8的项目必须采取改进措施\n5. **持续更新**：设计变更或问题发生时更新FMEA";
+q3:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q4:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q5:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q6:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q7:"1. **现状调查**：退货样品全检，分类统计不良类型、不良批次、对应供应商/产线\n2. **原因分析**：组织生产、研发、采购跨部门召开不良分析会，用5Why定位根因\n3. **措施制定**：区分制程问题、来料零部件问题，分别制定纠正措施\n4. **短期措施**：加严来料检验、产线全检\n5. **长期措施**：优化模具、更新装配作业标准\n6. **效果验证**：跟踪1个月退货数据验证改善效果\n7. **标准化**：更新FMEA、作业指导书，开展全员质量培训，防止重复发生";
 var questions=[QUESTIONS_JS];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>

@@ -78,19 +78,19 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 </div>
 
 <div class="question" data-id="q3" data-answer="ABD" data-type="single">
-<div class="question-header">第4题：以下属于"纠正"措施的有？<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 返工</span></label>
-<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 返修</span></label>
-<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 修改工艺参数</span></label>
-<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 报废</span></label>
+<div class="question-header">第4题：以下属于预防成本的项目有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 新品设计评审费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 质量策划费用</span></label>
 </div>
 
-<div class="question" data-id="q4" data-answer="ABD" data-type="multi">
-<div class="question-header">第5题：以下属于"纠正"措施的有？<span class="badge badge-multi">多选</span></div>
-<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 返工</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 返修</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 修改工艺参数</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 报废</span></label>
+<div class="question" data-id="q4" data-answer="ABD" data-type="single">
+<div class="question-header">第5题：以下属于质量成本预防成本的有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q4" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="B"><span>B. 质量策划费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q4" value="D"><span>D. 新品设计评审费</span></label>
 </div>
 
 
@@ -109,9 +109,11 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 var explanations=q0:"纠正措施与纠正的核心区别是：纠正仅消除当前不良，纠正措施消除不良根本原因。纠正针对现象/产品，纠正措施针对原因/体系。",
 q1:"发现不合格品后，防止问题再次发生的措施属于纠正措施。纠正措施是针对根本原因采取措施，防止问题再发生。",
 q2:"客户投诉后，给客户换货属于纠正（临时处置）。纠正措施应该是分析原因，改进设计/工艺，防止再发生。",
-q3:"纠正（Correction）是消除已发现的不合格，针对现象/产品进行临时处置。包括：返工、返修、挑选、报废。修改工艺参数属于纠正措施。",
-q4:"纠正（Correction）是消除已发现的不合格，针对现象/产品进行临时处置。包括：返工、返修、挑选、报废。修改工艺参数属于纠正措施。",
-q5:"1. **纠正（临时处置）**：\n   - 隔离不良品，防止流入下工序\n   - 全检库存，挑选合格品\n   - 对客户已发货产品召回或换货\n   - 加严检验，拦截不良品\n\n2. **纠正措施（消除根因）**：\n   - 成立改善小组（质量、工艺、生产）\n   - 运用5Why分析根本原因\n   - 制定纠正措施计划\n   - 实施纠正措施（如修改工艺、更新设备、培训员工）\n   - 验证纠正措施有效性\n   - 标准化（更新作业指导书、控制计划）\n\n3. **预防措施**：\n   - 更新FMEA，识别类似风险\n   - 横向展开到其他产品/工序\n   - 培训员工，提高质量意识\n\n4. **效果跟踪**：\n   - 统计改善后不良率\n   - 跟踪3个月确认效果\n   - 纳入日常管理";
+q3:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q4:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q5:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q6:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q7:"1. **现状调查**：退货样品全检，分类统计不良类型、不良批次、对应供应商/产线\n2. **原因分析**：组织生产、研发、采购跨部门召开不良分析会，用5Why定位根因\n3. **措施制定**：区分制程问题、来料零部件问题，分别制定纠正措施\n4. **短期措施**：加严来料检验、产线全检\n5. **长期措施**：优化模具、更新装配作业标准\n6. **效果验证**：跟踪1个月退货数据验证改善效果\n7. **标准化**：更新FMEA、作业指导书，开展全员质量培训，防止重复发生";
 var questions=[QUESTIONS_JS];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>

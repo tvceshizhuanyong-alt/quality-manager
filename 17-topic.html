@@ -77,20 +77,20 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 以领导为中心</span></label>
 </div>
 
-<div class="question" data-id="q3" data-answer="ABCD" data-type="single">
-<div class="question-header">第4题：全面质量管理的特点包括？<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 全过程的质量管理</span></label>
-<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 全员的质量管理</span></label>
-<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 全企业的质量管理</span></label>
-<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 多方法的质量管理</span></label>
+<div class="question" data-id="q3" data-answer="ABD" data-type="single">
+<div class="question-header">第4题：以下属于预防成本的项目有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 新品设计评审费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 质量策划费用</span></label>
 </div>
 
-<div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
-<div class="question-header">第5题：全面质量管理的特点包括？<span class="badge badge-multi">多选</span></div>
-<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 全过程的质量管理</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 全员的质量管理</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 全企业的质量管理</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 多方法的质量管理</span></label>
+<div class="question" data-id="q4" data-answer="ABD" data-type="single">
+<div class="question-header">第5题：以下属于质量成本预防成本的有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q4" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="B"><span>B. 质量策划费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q4" value="D"><span>D. 新品设计评审费</span></label>
 </div>
 
 
@@ -109,9 +109,11 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 var explanations=q0:"质量管理发展经历了三个阶段：质量检验阶段、统计质量控制阶段、全面质量管理阶段。",
 q1:"统计质量控制阶段的代表人物是休哈特（Shewhart），他提出了控制图理论。戴明和朱兰是全面质量管理阶段的代表人物。",
 q2:"全面质量管理的核心理念是全员参与、持续改进。强调全过程、全员、全企业的质量管理。",
-q3:"全面质量管理的特点是\"三全一多\"：全过程、全员、全企业、多方法的质量管理。",
-q4:"全面质量管理的特点是\"三全一多\"：全过程、全员、全企业、多方法的质量管理。",
-q5:"1. **全过程质量管理**：\n   - 从市场调研、设计开发、采购、生产、检验到售后服务\n   - 每个环节都要控制质量\n   - 建立过程控制程序\n\n2. **全员质量管理**：\n   - 从最高管理者到一线员工\n   - 开展质量培训\n   - 建立质量责任制\n   - 开展QC小组活动\n\n3. **全企业质量管理**：\n   - 各部门协同配合\n   - 建立质量管理体系\n   - 跨部门质量改善团队\n\n4. **多方法质量管理**：\n   - 运用统计技术（SPC、MSA等）\n   - 运用质量工具（FMEA、QFD等）\n   - 持续改进（PDCA、六西格玛等）";
+q3:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q4:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q5:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q6:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q7:"1. **现状调查**：退货样品全检，分类统计不良类型、不良批次、对应供应商/产线\n2. **原因分析**：组织生产、研发、采购跨部门召开不良分析会，用5Why定位根因\n3. **措施制定**：区分制程问题、来料零部件问题，分别制定纠正措施\n4. **短期措施**：加严来料检验、产线全检\n5. **长期措施**：优化模具、更新装配作业标准\n6. **效果验证**：跟踪1个月退货数据验证改善效果\n7. **标准化**：更新FMEA、作业指导书，开展全员质量培训，防止重复发生";
 var questions=[QUESTIONS_JS];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>

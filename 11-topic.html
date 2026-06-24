@@ -77,25 +77,20 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 降低不良率</span></label>
 </div>
 
-<div class="question" data-id="q3" data-answer="C" data-type="single">
-<div class="question-header">第4题：评价维度不包含？<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 选项A</span></label>
-<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 六西格玛水平</span></label>
-<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 选项C</span></label>
-<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 选项D</span></label>
+<div class="question" data-id="q3" data-answer="ABD" data-type="single">
+<div class="question-header">第4题：以下属于预防成本的项目有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 新品设计评审费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 质量策划费用</span></label>
 </div>
 
-<div class="question" data-id="q4" data-answer="ABCDE" data-type="multi">
-<div class="question-header">第5题：SMART原则包括以下哪些要素？<span class="badge badge-multi">多选</span></div>
-<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. Specific（具体的）</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. Measurable（可衡量的）</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. Attainable（可实现的）</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. Relevant（相关的）</span></label>
-<label class="option-label"><input type="checkbox" name="q4" value="E"><span>E. Time-bound（有时限的）</span></label>
-</div>
-
-<div class="question" data-id="q5" data-answer="" data-type="case">
-<div class="question-header">第6题：某企业需要制定年度质量目标，请运用SMART原则设计。<span class="badge badge-multi">案例</span></div>
+<div class="question" data-id="q4" data-answer="ABD" data-type="single">
+<div class="question-header">第5题：以下属于质量成本预防成本的有？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q4" value="A"><span>A. 质量培训费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="B"><span>B. 质量策划费用</span></label>
+<label class="option-label"><input type="radio" name="q4" value="C"><span>C. 来料检验费</span></label>
+<label class="option-label"><input type="radio" name="q4" value="D"><span>D. 新品设计评审费</span></label>
 </div>
 
 
@@ -114,9 +109,11 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 var explanations=q0:"SMART原则中M代表Measurable（可衡量的）。S=Specific（具体的），A=Attainable（可实现的），R=Relevant（相关的），T=Time-bound（有时限的）。",
 q1:"SMART原则中T代表Time-bound（有时限的），指目标必须有明确的完成期限。",
 q2:"符合SMART原则的目标必须同时满足五个要素。'2026年Q3前，将产品一次合格率从95%提升至98%'具体、可衡量、可实现、相关、有时限。",
-q3:"2023年真题。六西格玛水平是正确答案。",
-q4:"2023年真题。六西格玛水平是正确答案。",
-q5:"SMART原则包括五个要素：Specific（具体的）、Measurable（可衡量的）、Attainable（可实现的）、Relevant（相关的）、Time-bound（有时限的）。";
+q3:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q4:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q5:"预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
+q6:"预防成本包括质量培训费、质量策划费、新品设计评审费等。来料检验费属于鉴定成本。",
+q7:"1. **现状调查**：退货样品全检，分类统计不良类型、不良批次、对应供应商/产线\n2. **原因分析**：组织生产、研发、采购跨部门召开不良分析会，用5Why定位根因\n3. **措施制定**：区分制程问题、来料零部件问题，分别制定纠正措施\n4. **短期措施**：加严来料检验、产线全检\n5. **长期措施**：优化模具、更新装配作业标准\n6. **效果验证**：跟踪1个月退货数据验证改善效果\n7. **标准化**：更新FMEA、作业指导书，开展全员质量培训，防止重复发生";
 var questions=[QUESTIONS_JS];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>
