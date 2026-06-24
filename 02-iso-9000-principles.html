@@ -148,7 +148,7 @@ ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
 
 <section class="panel quiz-section" id="quiz">
 <div class="quiz-title">练习题</div>
-<h2>互动练习题（5道）</h2>
+<h2>互动练习题（6道）</h2>
 
 <div class="question" data-id="q0" data-answer="C" data-type="single">
 <div class="question-header">第1题：ISO 9001:2015七项质量管理原则不包含？<span class="badge badge-single">单选</span></div>
@@ -191,6 +191,14 @@ ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
 <label class="option-label"><input type="radio" name="q4" value="D"><span>D. 删除了"领导作用"</span></label>
 </div>
 
+<div class="question" data-id="q5" data-answer="D" data-type="single">
+<div class="question-header">第6题（案例）：案例：某企业正在导入ISO 9001:2015质量管理体系，作为质量经理，在建立体系时首先应运用哪项质量管理原则？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q5" value="A"><span>A. 改进——持续改进体系运行中的问题</span></label>
+<label class="option-label"><input type="radio" name="q5" value="B"><span>B. 循证决策——收集数据分析后做决策</span></label>
+<label class="option-label"><input type="radio" name="q5" value="C"><span>C. 全员积极参与——培训全体员工参与体系</span></label>
+<label class="option-label"><input type="radio" name="q5" value="D"><span>D. 领导作用——最高管理者确立质量方针和方向</span></label>
+</div>
+
 <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
 <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
 </section>
@@ -206,6 +214,8 @@ q1:"教材原文：ISO 9001用于认证审核，ISO 9004《追求组织的持续
 q2:"教材原文：七项原则包括：以顾客为关注焦点、领导作用、全员积极参与、过程方法、改进、循证决策、关系管理。统计过程控制（SPC）是工具方法，不属于原则。",
 q3:"教材原文：七项质量管理原则是由ISO/TC176的各国专家总结了国际上质量管理大师及许多优秀组织多年的最佳实践提炼而成，是ISO 9000族标准的理论基础。",
 q4:"教材原文：2000版ISO 9000族标准提出八项原则，2015版合并为七项原则。主要变化是：原'管理的系统方法'合并到'过程方法'中；原'基于事实的决策方法'改为'循证决策'；原'与供方的互利关系'改为'关系管理'。"
+,
+q5:"建立质量管理体系时，首先需要最高管理者确立质量方针和方向（领导作用），这是体系建立的前提和基础。没有领导的支持和推动，其他原则难以有效实施。"
 };
 var questions=[
 {id:'q0',text:'ISO 9001:2015七项质量管理原则不包含哪一项？'},
@@ -213,6 +223,8 @@ var questions=[
 {id:'q2',text:'以下哪些属于ISO 9001:2015七项质量管理原则？'},
 {id:'q3',text:'七项质量管理原则在ISO 9000族标准中的地位是什么？'},
 {id:'q4',text:'2015版ISO 9000族标准将八项原则合并为七项，主要变化是什么？'}
+,
+{id:'q5',text:'案例：某企业正在导入ISO 9001:2015质量管理体系，作为质量经理，在建立体系时首先应运用哪项质量管理原则？'}
 ];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>

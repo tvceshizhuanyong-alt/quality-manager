@@ -145,7 +145,7 @@ ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
 
 <section class="panel quiz-section" id="quiz">
 <div class="quiz-title">练习题</div>
-<h2>互动练习题（5道）</h2>
+<h2>互动练习题（6道）</h2>
 
 <div class="question" data-id="q0" data-answer="B" data-type="single">
 <div class="question-header">第1题：用于识别潜在产品失效风险的工具是？<span class="badge badge-single">单选</span></div>
@@ -187,6 +187,14 @@ ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
 <label class="option-label"><input type="radio" name="q4" value="D"><span>D. 降低检测频次</span></label>
 </div>
 
+<div class="question" data-id="q5" data-answer="B" data-type="single">
+<div class="question-header">第6题（案例）：案例：某企业开发新产品，作为质量经理，运用FMEA进行风险管控时，首先应做的是？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q5" value="A"><span>A. 直接计算风险优先数RPN</span></label>
+<label class="option-label"><input type="radio" name="q5" value="B"><span>B. 组建跨部门FMEA团队，识别产品功能要求和潜在失效模式</span></label>
+<label class="option-label"><input type="radio" name="q5" value="C"><span>C. 制定纠正措施并验证效果</span></label>
+<label class="option-label"><input type="radio" name="q5" value="D"><span>D. 对已发生的不合格进行原因分析</span></label>
+</div>
+
 <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
 <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
 </section>
@@ -202,6 +210,8 @@ q1:"教材原文：RPN（风险顺序数）= S（严重度）× O（发生度）
 q2:"教材原文：RPN的取值范围是1-1000。每个因子（S、O、D）取值1-10分，三者相乘最大为10×10×10=1000。",
 q3:"教材原文：DFMEA（设计FMEA）关注产品设计缺陷，PFMEA（过程FMEA）关注制造过程缺陷。FMEA是预防性工具（事前分析），不是事后分析。RPN越高风险越高。",
 q4:"教材原文：当RPN > 100或严重度S ≥ 8时，必须采取改进措施。这是FMEA的风险判定标准，不能忽略或仅记录。"
+,
+q5:"FMEA的第一步是组建跨部门团队（设计、工艺、质量、生产），然后识别产品功能要求、分析潜在失效模式、评估失效后果（严重度S）。RPN计算在失效模式识别之后进行。"
 };
 var questions=[
 {id:'q0',text:'用于识别潜在产品失效风险的工具是什么？'},
@@ -209,6 +219,8 @@ var questions=[
 {id:'q2',text:'RPN的取值范围是什么？'},
 {id:'q3',text:'以下关于FMEA的说法正确的有哪些？'},
 {id:'q4',text:'当RPN > 100或S ≥ 8时，应该怎么做？'}
+,
+{id:'q5',text:'案例：某企业开发新产品，作为质量经理，运用FMEA进行风险管控时，首先应做的是？'}
 ];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';html+='<div style="margin-top:6px;color:#555;font-size:13px">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>
