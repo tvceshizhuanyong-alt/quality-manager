@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>质量经理手册 · 专题41：管理评审深化</title>
+<style>
+:root{--bg:#f0f4ff;--paper:#fff;--ink:#1a2332;--muted:#5a6a7e;--line:#dce3f0;--blue:#2563eb;--cyan:#0ea5e9;--green:#16a34a;--orange:#f59e0b;--red:#ef4444;--purple:#7c3aed;--pink:#d63384;--radius:10px;--max:1200px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:var(--max);margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700}
+.brand-title{font-size:15px;font-weight:700;color:var(--ink)}
+.brand-sub{font-size:12px;color:var(--muted);margin-left:6px}
+.top-links{display:flex;gap:4px}
+.top-links a{padding:6px 12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;transition:all .15s}
+.top-links a:hover{background:#e8f0fe;color:var(--blue)}
+.hero{max-width:var(--max);margin:0 auto;padding:48px 28px 32px}
+.hero h1{margin:0;font-size:clamp(34px,5vw,56px);line-height:1.08;color:var(--ink);letter-spacing:-.5px}
+.hero-lead{color:#475569;font-size:17px;margin-top:18px;max-width:640px;line-height:1.7}
+.hero-board{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px rgba(37,99,235,.06);padding:20px;margin-top:20px}
+.keyword-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.keyword-card{background:#f8faff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;transition:transform .15s}
+.keyword-card:hover{transform:translateY(-2px);border-color:#bfdbfe}
+.keyword-card .kw{font-size:22px;font-weight:800;color:var(--blue);line-height:1}
+.keyword-card .kw-sub{font-size:12px;font-weight:700;color:var(--ink);margin-top:6px}
+.keyword-card .kw-desc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+.main-layout{max-width:820px;margin:0 auto;padding:16px 28px 64px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 32px;margin-bottom:20px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
+.section-num{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px}
+h2{margin:0 0 14px;font-size:clamp(24px,3vw,32px);line-height:1.15;color:var(--ink)}
+h3{margin:22px 0 10px;font-size:19px;color:var(--ink)}
+p{margin:10px 0;color:#334155}
+ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
+.hl{display:inline-block;padding:1px 8px;border-radius:6px;background:#dbeafe;color:var(--blue);font-weight:700;font-size:.95em}
+.hl.green{background:#dcfce7;color:var(--green)}
+.hl.orange{background:#fef3c7;color:#b45309}
+.hl.purple{background:#ede9fe;color:var(--purple)}
+.hl.red{background:#fee2e2;color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.card{border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:#fafbff}
+.card h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
+.card p{margin:0;font-size:13px;color:#475569;line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th{background:#f1f5f9;padding:10px 12px;text-align:left;border:1px solid var(--line);font-weight:700;font-size:13px;color:var(--muted)}
+td{padding:10px 12px;border:1px solid var(--line);color:#334155}
+.callout{margin:16px 0;padding:14px 16px;border-left:4px solid var(--blue);background:#eff6ff;border-radius:0 8px 8px 0;font-size:14px;color:#1e3a5f;font-weight:600;line-height:1.6}
+.callout.warn{border-left-color:var(--orange);background:#fffbeb;color:#78350f}
+.quiz-section{background:var(--paper);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
+.quiz-section .quiz-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.quiz-section h2{font-size:18px;font-weight:700;color:var(--pink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #fce7f3}
+.question{background:#fafbff;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:14px}
+.question-header{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:6px;vertical-align:middle}
+.badge-multi{background:#fce7f3;color:var(--pink)}
+.badge-single{background:#dcfce7;color:var(--green)}
+.option-label{display:flex;align-items:flex-start;padding:7px 0;cursor:pointer;font-size:14px;color:#334155}
+.option-label input{margin-top:3px;margin-right:10px;accent-color:var(--blue);width:16px;height:16px;flex-shrink:0}
+.submit-wrap{text-align:center;margin:20px 0}
+.submit-btn{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border:none;border-radius:24px;padding:14px 56px;font-size:17px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(37,99,235,.3);-webkit-tap-highlight-color:transparent;user-select:none;touch-action:manipulation}
+.submit-btn:hover{opacity:.9;transform:translateY(-1px)}
+.submit-btn:active{transform:translateY(0);opacity:.8}
+.submit-btn:disabled{cursor:not-allowed;opacity:.5}
+.result{display:none;margin-top:20px}
+.score-bar{background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
+.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
+.result-correct{background:#dcfce7;border:1px solid #86efac}
+.result-wrong{background:#fee2e2;border:1px solid #fca5a5}
+.footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
+.footer .sign{font-size:13px;color:#64748b;margin-top:6px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.top-links{display:none}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+<div class="topbar-inner">
+<a class="brand" href="#top">
+<div class="brand-mark">质</div>
+<span><span class="brand-title">质量经理手册</span><span class="brand-sub">专题41：管理评审深化</span></span>
+</a>
+<nav class="top-links">
+<a href="#s1">知识要点</a>
+<a href="#s2">易错点</a>
+<a href="#quiz">练习题</a>
+</nav>
+</div>
+</header>
+
+<section class="hero" id="top">
+<div>
+<h1>管理评审深化</h1>
+<p class="hero-lead">本专题涵盖管理评审深化的核心知识点，是注册质量经理考试的重要内容。通过知识讲解和互动练习，帮你巩固掌握。</p>
+<div class="hero-board">
+<div class="keyword-grid">
+<div class="keyword-card"><div class="kw" style="color:var(--green)">管理评审的目的主</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--blue)">管理评审的输入通</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--orange)">常不包括</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--red)">管理评审的输出通</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<main class="main-layout">
+
+<section class="panel" id="s1">
+<div class="section-num">知识要点</div>
+<h2>管理评审深化 · 核心知识</h2>
+<div class="cards"><div class="card"><h4>① 管理评审的目的主要是？</h4><p>管理评审是最高管理者对质量管理体系进行综合评价，以确保其持续适宜、充分和有效。</p></div><div class="card"><h4>② 管理评审的输入通常不包括？</h4><p>管理评审输入应包括审核结果、顾客反馈、过程绩效、目标完成情况、纠正措施状态、外部变化等，午餐满意度不是常规输入。</p></div><div class="card"><h4>③ 管理评审的输出通常包括？</h4><p>管理评审输出通常包括改进机会、资源需求、体系和过程变更决定，以及必要的措施要求。</p></div><div class="card"><h4>④ 管理评审关注的典型内容有？</h4><p>管理评审不仅看体系有没有运行，还要看是否适合当前环境、是否资源充分、是否真正有效，并与战略方向保持一致。</p></div></div><div class="callout">💡 重点掌握以上知识点的核心概念，考试中经常以选择题形式出现。</div>
+</section>
+
+<section class="panel" id="s2">
+<div class="section-num">易错点</div>
+<h2>高频陷阱与易混淆点</h2>
+<div class="cards"><div class="card"><h4>⚠️ 管理评审关注的典型内容有？</h4><p>管理评审不仅看体系有没有运行，还要看是否适合当前环境、是否资源充分、是否真正有效，并与战略方向保持一致。</p></div><div class="card"><h4>💡 某公司年度管理评审会议只是听汇报、念数据，最后没有...</h4><p>面对问题，首先应组织跨部门分析根因，制定纠正措施。</p></div></div><div class="callout warn">⚠️ 考试注意：仔细审题，注意选项中的关键词差异！</div>
+</section>
+
+<section class="panel quiz-section" id="quiz">
+<div class="quiz-title">练习题</div>
+<h2>互动练习题（5道）</h2>
+
+<div class="question" data-id="q0" data-answer="B" data-type="single">
+<div class="question-header">第1题：管理评审的目的主要是？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q0" value="A"><span>A. 处罚责任人</span></label>
+<label class="option-label"><input type="radio" name="q0" value="B"><span>B. 评价体系的适宜性、充分性和有效性</span></label>
+<label class="option-label"><input type="radio" name="q0" value="C"><span>C. 统计产量</span></label>
+<label class="option-label"><input type="radio" name="q0" value="D"><span>D. 审核供应商价格</span></label>
+</div>
+
+<div class="question" data-id="q1" data-answer="D" data-type="single">
+<div class="question-header">第2题：管理评审的输入通常不包括？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q1" value="A"><span>A. 审核结果</span></label>
+<label class="option-label"><input type="radio" name="q1" value="B"><span>B. 顾客反馈</span></label>
+<label class="option-label"><input type="radio" name="q1" value="C"><span>C. 质量目标达成情况</span></label>
+<label class="option-label"><input type="radio" name="q1" value="D"><span>D. 员工午餐满意度</span></label>
+</div>
+
+<div class="question" data-id="q2" data-answer="D" data-type="single">
+<div class="question-header">第3题：管理评审的输出通常包括？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q2" value="A"><span>A. 改进机会</span></label>
+<label class="option-label"><input type="radio" name="q2" value="B"><span>B. 资源需求</span></label>
+<label class="option-label"><input type="radio" name="q2" value="C"><span>C. 体系变更决定</span></label>
+<label class="option-label"><input type="radio" name="q2" value="D"><span>D. 以上都是</span></label>
+</div>
+
+<div class="question" data-id="q3" data-answer="ABCD" data-type="multi">
+<div class="question-header">第4题：管理评审关注的典型内容有？<span class="badge badge-multi">多选</span></div>
+<label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 体系适宜性</span></label>
+<label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 体系充分性</span></label>
+<label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 体系有效性</span></label>
+<label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 体系与战略方向的一致性</span></label>
+</div>
+
+<div class="question" data-id="q4" data-answer="C" data-type="single">
+<div class="question-header">第5题（案例）：某公司年度管理评审会议只是听汇报、念数据，最后没有形成明确改进措施。作为质量经理，你会如何把管理评审做实？<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q4" value="A"><span>A. 立即增加检验频次</span></label>
+<label class="option-label"><input type="radio" name="q4" value="B"><span>B. 加强售后维修团队</span></label>
+<label class="option-label"><input type="radio" name="q4" value="C"><span>C. 组织跨部门分析根因并制定纠正措施</span></label>
+<label class="option-label"><input type="radio" name="q4" value="D"><span>D. 降低产品售价弥补客户</span></label>
+</div>
+
+<div class="submit-wrap"><button class="submit-btn" type="button" id="submitBtn">提交答案</button></div>
+<div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+</section>
+
+</main>
+
+<footer class="footer"><p>© 质量经理手册互动练习</p><div class="sign">⚡ 与你同行 AI 浪潮，打造智能工作新范式</div></footer>
+
+<script>
+var explanations={"q0":"管理评审是最高管理者对质量管理体系进行综合评价，以确保其持续适宜、充分和有效。","q1":"管理评审输入应包括审核结果、顾客反馈、过程绩效、目标完成情况、纠正措施状态、外部变化等，午餐满意度不是常规输入。","q2":"管理评审输出通常包括改进机会、资源需求、体系和过程变更决定，以及必要的措施要求。","q3":"管理评审不仅看体系有没有运行，还要看是否适合当前环境、是否资源充分、是否真正有效，并与战略方向保持一致。","q4":"面对问题，首先应组织跨部门分析根因，制定纠正措施。"};
+var questions=[{"id":"q0","text":"管理评审的目的主要是？"},{"id":"q1","text":"管理评审的输入通常不包括？"},{"id":"q2","text":"管理评审的输出通常包括？"},{"id":"q3","text":"管理评审关注的典型内容有？"},{"id":"q4","text":"某公司年度管理评审会议只是听汇报、念数据，最后没有形成明确改进措施。作为质量经理，你会如何把管理评审做实？"}];
+
+function submitQuiz(){
+  try {
+    let score=0,html='';
+    questions.forEach((q,idx)=>{
+      const box=document.querySelector('.question[data-id="'+q.id+'"]');
+      if(!box) return;
+      const correct=box.getAttribute('data-answer');
+      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');
+      const correctSorted=correct.split('').sort().join('');
+      const ok=checked===correctSorted;
+      if(ok)score++;
+      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
+      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+    });
+    var scoreBar=document.getElementById('scoreBar');
+    var resultDetails=document.getElementById('resultDetails');
+    var resultDiv=document.getElementById('result');
+    var submitBtn=document.getElementById('submitBtn');
+    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    if(resultDetails) resultDetails.innerHTML=html;
+    if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
+    if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
+    document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+  } catch(e) {
+    alert('提交出错，请刷新页面重试：'+e.message);
+  }
+}
+
+(function(){
+  function bindBtn(){
+    var btn=document.getElementById('submitBtn');
+    if(!btn) return;
+    btn.addEventListener('click',function(e){e.preventDefault();if(!this.disabled)submitQuiz();},false);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bindBtn);}
+  else{bindBtn();}
+})();
+</script>
+</body>
+</html>
