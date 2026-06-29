@@ -84,6 +84,9 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
 .result-correct{background:#dcfce7;border:1px solid #86efac}
 .result-wrong{background:#fee2e2;border:1px solid #fca5a5}
+.case-answer{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px}
+.case-answer:disabled{background:#f5f5f5;cursor:not-allowed}
+.char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
 
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
@@ -252,14 +255,16 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 
 </div>
 
-<div class="question" data-id="q6" data-answer="" data-type="case">
+<div class="question" data-id="q6" data-answer="1.识别当前体系与卓越绩效模式的差距；2.从战略导向、顾客驱动、过程管理等方面系统改进；3.建立结果导向的评价机制；4.持续跟踪改进效果。" data-type="case">
 <div class="question-header">第7题（案例）：某公司质量体系运行多年，但经营结果提升不明显。请结合卓越绩效模式提出提升建议。<span class="badge badge-case">案例</span></div>
-<textarea class="case-answer" placeholder="请输入你的答案..." rows="4"></textarea>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="" data-type="case">
+<div class="question" data-id="q7" data-answer="1.文件合规只关注"有没有"，不关注"好不好"；2.缺乏结果导向和成熟度评价；3.无法驱动系统性改进；4.不能帮助组织追求卓越经营。" data-type="case">
 <div class="question-header">第8题（案例）：某企业想用"只做文件合规"替代卓越绩效评价。请说明其局限。<span class="badge badge-case">案例</span></div>
-<textarea class="case-answer" placeholder="请输入你的答案..." rows="4"></textarea>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
 <div class="submit-wrap"><button class="submit-btn" type="button" id="submitBtn">提交答案</button></div>
@@ -277,17 +282,17 @@ q2:"卓越绩效评价准则的主线是使命、愿景、价值观和战略。"
 q3:"卓越绩效模式是一套将组织经营管理的"道""术""度"相融合的管理模式。",
 q4:"基本理念包括远见卓识的领导、战略导向、顾客驱动、以人为本、合作共赢、系统管理、持续改进、事实决策、社会责任。",
 q5:"卓越绩效更强调结果、成熟度和整体经营管理。",
-q6:"",
-q7:""};
+q6:"案例题解析：应从战略导向、顾客驱动、过程管理、结果导向等方面系统改进，建立卓越绩效评价体系。",
+q7:"案例题解析：文件合规只关注形式，不关注结果；缺乏成熟度评价；无法驱动系统性改进；不能帮助组织追求卓越经营。"};
 var questions=[
-{id:'q0',text:'卓越绩效评价准则评价维度不包含?'},
-{id:'q1',text:'卓越绩效模式与ISO 9001的关系是?'},
-{id:'q2',text:'卓越绩效评价准则的主线是?'},
-{id:'q3',text:'卓越绩效模式的实质是?'},
-{id:'q4',text:'卓越绩效评价准则的基本理念包括?'},
-{id:'q5',text:'卓越绩效模式与ISO 9001相比,更强调?'},
-{id:'q6',text:'某公司质量体系运行多年,但经营结果提升不明显。请结合卓越绩效模式提出提升建议。'},
-{id:'q7',text:'某企业想用"只做文件合规"替代卓越绩效评价。请说明其局限。'}
+{id:'q0',text:'卓越绩效评价准则评价维度不包含?',type:'single'},
+{id:'q1',text:'卓越绩效模式与ISO 9001的关系是?',type:'single'},
+{id:'q2',text:'卓越绩效评价准则的主线是?',type:'single'},
+{id:'q3',text:'卓越绩效模式的实质是?',type:'single'},
+{id:'q4',text:'卓越绩效评价准则的基本理念包括?',type:'multi'},
+{id:'q5',text:'卓越绩效模式与ISO 9001相比,更强调?',type:'multi'},
+{id:'q6',text:'某公司质量体系运行多年,但经营结果提升不明显。请结合卓越绩效模式提出提升建议。',type:'case'},
+{id:'q7',text:'某企业想用"只做文件合规"替代卓越绩效评价。请说明其局限。',type:'case'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -297,27 +302,52 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题:'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案:<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案:<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案:<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      
+      if(q.type==='case'){
+        // 案例题：显示用户输入和参考答案
+        const textarea=box.querySelector('.case-answer');
+        const userAnswer=textarea?textarea.value.trim():'';
+        html+='<div class="result-card result-wrong">';
+        html+='<div style="font-weight:600;margin-bottom:6px">📝 第'+(idx+1)+'题（案例）:'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        // 选择题：原有逻辑
+        const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+        const ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题:'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案:<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案:<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案:<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分:'+score+' / '+questions.length+(score===questions.length?' 🎉 满分!':'');
+    // 计算选择题得分
+    var totalChoice=questions.filter(q=>q.type!=='case').length;
+    if(scoreBar) scoreBar.textContent='选择题得分:'+score+' / '+totalChoice+(score===totalChoice?' 🎉 满分!':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错,请刷新页面重试:'+e.message);
   }
+}
+
+// 字数统计
+function updateCharCount(){
+  document.querySelectorAll('.case-answer').forEach(function(ta){
+    var count=ta.value.length;
+    var countDiv=ta.parentElement.querySelector('.char-count');
+    if(countDiv) countDiv.textContent=count+'/200';
+  });
 }
 
 // 绑定按钮事件(兼容PC和移动端)
@@ -326,6 +356,10 @@ function submitQuiz(){
     var btn=document.getElementById('submitBtn');
     if(!btn) return;
     btn.addEventListener('click',function(e){e.preventDefault();if(!this.disabled)submitQuiz();},false);
+    // 绑定字数统计
+    document.querySelectorAll('.case-answer').forEach(function(ta){
+      ta.addEventListener('input',updateCharCount);
+    });
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bindBtn);}
   else{bindBtn();}
