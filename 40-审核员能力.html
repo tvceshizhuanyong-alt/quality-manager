@@ -72,6 +72,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:6px;vertical-align:middle}
 .badge-multi{background:#fce7f3;color:var(--pink)}
 .badge-single{background:#dcfce7;color:var(--green)}
+.badge-case{background:#fff7ed;color:#c2410c}
 .option-label{display:flex;align-items:flex-start;padding:7px 0;cursor:pointer;font-size:14px;color:#334155}
 .option-label input{margin-top:3px;margin-right:10px;accent-color:var(--blue);width:16px;height:16px;flex-shrink:0}
 .submit-wrap{text-align:center;margin:20px 0}
@@ -84,6 +85,9 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
 .result-correct{background:#dcfce7;border:1px solid #86efac}
 .result-wrong{background:#fee2e2;border:1px solid #fca5a5}
+.case-answer{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px}
+.case-answer:disabled{background:#f5f5f5;cursor:not-allowed}
+.char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
 
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
@@ -246,20 +250,16 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 情绪优先</span></label>
 </div>
 
-<div class="question" data-id="q6" data-answer="A" data-type="single">
-<div class="question-header">第7题：<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q6" value="A"><span>A. 案例题：请查看参考答案</span></label>
-<label class="option-label"><input type="radio" name="q6" value="B"><span>B. 案例题：请查看参考答案</span></label>
-<label class="option-label"><input type="radio" name="q6" value="C"><span>C. 案例题：请查看参考答案</span></label>
-<label class="option-label"><input type="radio" name="q6" value="D"><span>D. 案例题：请查看参考答案</span></label>
+<div class="question" data-id="q6" data-answer="A" data-type="case">
+<div class="question-header">第7题：<span class="badge badge-case">案例</span></div>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="A" data-type="single">
-<div class="question-header">第8题：<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q7" value="A"><span>A. 案例题：请查看参考答案</span></label>
-<label class="option-label"><input type="radio" name="q7" value="B"><span>B. 案例题：请查看参考答案</span></label>
-<label class="option-label"><input type="radio" name="q7" value="C"><span>C. 案例题：请查看参考答案</span></label>
-<label class="option-label"><input type="radio" name="q7" value="D"><span>D. 案例题：请查看参考答案</span></label>
+<div class="question" data-id="q7" data-answer="A" data-type="case">
+<div class="question-header">第8题：<span class="badge badge-case">案例</span></div>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
 <div class="submit-wrap"><button class="submit-btn" type="button" id="submitBtn">提交答案</button></div>
@@ -312,8 +312,8 @@ var questions=[
 - B. 公正客观
 - C. 围绕标准要求
 - D. 情绪优先"},
-{id:'q6',text:""},
-{id:'q7',text:""}
+{id:'q6',text:'案例题'},
+{id:'q7',text:'案例题'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -348,10 +348,13 @@ function submitQuiz(){
 
 // 绑定按钮事件（兼容PC和移动端）
 (function(){
+  function updateCharCount(){document.querySelectorAll('.case-answer').forEach(function(ta){var c=ta.value.length;var d=ta.parentElement.querySelector('.char-count');if(d)d.textContent=c+'/200';});}
   function bindBtn(){
     var btn=document.getElementById('submitBtn');
     if(!btn) return;
     btn.addEventListener('click',function(e){e.preventDefault();if(!this.disabled)submitQuiz();},false);
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.addEventListener('input',updateCharCount);});
+    updateCharCount();
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bindBtn);}
   else{bindBtn();}
