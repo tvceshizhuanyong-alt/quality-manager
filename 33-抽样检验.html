@@ -8,6 +8,8 @@
 :root{--bg:#f0f4ff;--paper:#fff;--ink:#1a2332;--muted:#5a6a7e;--line:#dce3f0;--blue:#2563eb;--cyan:#0ea5e9;--green:#16a34a;--orange:#f59e0b;--red:#ef4444;--purple:#7c3aed;--pink:#d63384;--radius:10px;--max:1200px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+
+/* 顶部导航 */
 .topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .topbar-inner{max-width:var(--max);margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:10px}
@@ -17,16 +19,20 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 .top-links{display:flex;gap:4px}
 .top-links a{padding:6px 12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;transition:all .15s}
 .top-links a:hover{background:#e8f0fe;color:var(--blue)}
-.hero{max-width:var(--max);margin:0 auto;padding:48px 28px 32px}
+
+/* Hero */
+.hero{max-width:var(--max);margin:0 auto;padding:48px 28px 32px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:stretch}
 .hero h1{margin:0;font-size:clamp(34px,5vw,56px);line-height:1.08;color:var(--ink);letter-spacing:-.5px}
 .hero-lead{color:#475569;font-size:17px;margin-top:18px;max-width:640px;line-height:1.7}
-.hero-board{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px rgba(37,99,235,.06);padding:20px;margin-top:20px}
+.hero-board{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px rgba(37,99,235,.06);padding:20px;display:flex;flex-direction:column;justify-content:center}
 .keyword-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .keyword-card{background:#f8faff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;transition:transform .15s}
 .keyword-card:hover{transform:translateY(-2px);border-color:#bfdbfe}
 .keyword-card .kw{font-size:22px;font-weight:800;color:var(--blue);line-height:1}
 .keyword-card .kw-sub{font-size:12px;font-weight:700;color:var(--ink);margin-top:6px}
 .keyword-card .kw-desc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* 主内容 */
 .main-layout{max-width:820px;margin:0 auto;padding:16px 28px 64px}
 .panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 32px;margin-bottom:20px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
 .section-num{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px}
@@ -34,20 +40,30 @@ h2{margin:0 0 14px;font-size:clamp(24px,3vw,32px);line-height:1.15;color:var(--i
 h3{margin:22px 0 10px;font-size:19px;color:var(--ink)}
 p{margin:10px 0;color:#334155}
 ul,ol{margin:10px 0 0;padding-left:20px;color:#334155}li+li{margin-top:4px}
+
+/* 关键词高亮 */
 .hl{display:inline-block;padding:1px 8px;border-radius:6px;background:#dbeafe;color:var(--blue);font-weight:700;font-size:.95em}
 .hl.green{background:#dcfce7;color:var(--green)}
 .hl.orange{background:#fef3c7;color:#b45309}
 .hl.purple{background:#ede9fe;color:var(--purple)}
 .hl.red{background:#fee2e2;color:var(--red)}
+
+/* 卡片网格 */
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 .card{border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:#fafbff}
 .card h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
 .card p{margin:0;font-size:13px;color:#475569;line-height:1.5}
+
+/* 表格 */
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
 th{background:#f1f5f9;padding:10px 12px;text-align:left;border:1px solid var(--line);font-weight:700;font-size:13px;color:var(--muted)}
 td{padding:10px 12px;border:1px solid var(--line);color:#334155}
+
+/* Callout */
 .callout{margin:16px 0;padding:14px 16px;border-left:4px solid var(--blue);background:#eff6ff;border-radius:0 8px 8px 0;font-size:14px;color:#1e3a5f;font-weight:600;line-height:1.6}
 .callout.warn{border-left-color:var(--orange);background:#fffbeb;color:#78350f}
+
+/* 练习题 */
 .quiz-section{background:var(--paper);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;box-shadow:0 4px 20px rgba(37,99,235,.04)}
 .quiz-section .quiz-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px}
 .quiz-section h2{font-size:18px;font-weight:700;color:var(--pink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #fce7f3}
@@ -62,14 +78,17 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .submit-btn{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff;border:none;border-radius:24px;padding:14px 56px;font-size:17px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(37,99,235,.3);-webkit-tap-highlight-color:transparent;user-select:none;touch-action:manipulation}
 .submit-btn:hover{opacity:.9;transform:translateY(-1px)}
 .submit-btn:active{transform:translateY(0);opacity:.8}
-.submit-btn:disabled{cursor:not-allowed;opacity:.5}
+.submit-btn:disabled{cursor:not-allowed}
 .result{display:none;margin-top:20px}
 .score-bar{background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
 .result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
 .result-correct{background:#dcfce7;border:1px solid #86efac}
 .result-wrong{background:#fee2e2;border:1px solid #fca5a5}
+
+/* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
+
 @media(max-width:900px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.top-links{display:none}}
 </style>
 </head>
@@ -82,8 +101,9 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <span><span class="brand-title">质量经理手册</span><span class="brand-sub">专题33：抽样检验</span></span>
 </a>
 <nav class="top-links">
-<a href="#s1">知识要点</a>
-<a href="#s2">易错点</a>
+<a href="#s1">质量成本分类</a>
+<a href="#s2">杠杆关系</a>
+<a href="#s3">案例应用</a>
 <a href="#quiz">练习题</a>
 </nav>
 </div>
@@ -92,14 +112,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <section class="hero" id="top">
 <div>
 <h1>抽样检验</h1>
-<p class="hero-lead">本专题涵盖抽样检验的核心知识点，是注册质量经理考试的重要内容。通过知识讲解和互动练习，帮你巩固掌握。</p>
+<p class="hero-lead">质量成本是注册质量经理考试的<span class="hl orange">超高频考点</span>，每年必考。核心在于区分四类质量成本，并理解"预防投入越大，故障损失越小"的杠杆关系。</p>
+</div>
 <div class="hero-board">
 <div class="keyword-grid">
-<div class="keyword-card"><div class="kw" style="color:var(--green)">抽样检验的本质是</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
-<div class="keyword-card"><div class="kw" style="color:var(--blue)">主要用于哪类检验</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
-<div class="keyword-card"><div class="kw" style="color:var(--orange)">在抽样检验中</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
-<div class="keyword-card"><div class="kw" style="color:var(--red)">的含义最接近于</div><div class="kw-sub">考试要点</div><div class="kw-desc">详见练习题解析</div></div>
-</div>
+<div class="keyword-card"><div class="kw" style="color:var(--green)">预防</div><div class="kw-sub">投入最小</div><div class="kw-desc">培训费、设计评审费、质量策划费</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--blue)">鉴定</div><div class="kw-sub">检验把关</div><div class="kw-desc">来料检验、过程检验、检测设备</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--orange)">内部故障</div><div class="kw-sub">交付前损失</div><div class="kw-desc">返工返修、废品、复检</div></div>
+<div class="keyword-card"><div class="kw" style="color:var(--red)">外部故障</div><div class="kw-sub">交付后损失最大</div><div class="kw-desc">维修差旅、退货运输、客户索赔</div></div>
 </div>
 </div>
 </section>
@@ -107,23 +127,59 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <main class="main-layout">
 
 <section class="panel" id="s1">
-<div class="section-num">知识要点</div>
-<h2>抽样检验 · 核心知识</h2>
-<div class="cards"><div class="card"><h4>① 抽样检验的本质是？</h4><p>抽样检验是从总体中抽取部分样本进行检验，并据此推断总体质量状况。它不能完全替代全检，但可显著降低检验成本。</p></div><div class="card"><h4>② GB/T 2828.1 主要用于哪类检验？</h4><p>GB/T 2828.1 是最常见的计数抽样检验标准，用于按接收质量限（AQL）进行批量产品的抽样判定。</p></div><div class="card"><h4>③ 在抽样检验中，AQL 的含义最接近于？</h4><p>AQL（Acceptable Quality Level）通常译为可接受质量限或可接受质量水平，是抽样检验中用于制定接收准则的重要参数。</p></div><div class="card"><h4>④ 抽样检验相较于全检的优点包括？</h4><p>抽样检验能减少成本、缩短时间，尤其适用于破坏性检验。它不能完全避免质量风险，因此不能保证“零风险”。</p></div></div><div class="callout">💡 重点掌握以上知识点的核心概念，考试中经常以选择题形式出现。</div>
+<div class="section-num">2.1.1</div>
+<h2>质量成本四大类</h2>
+<p>质量成本是指为了确保和保证满意的质量而发生的费用以及没有达到满意的质量所造成的损失。</p>
+
+<table>
+<tr><th>类别</th><th>定义</th><th>典型项目</th></tr>
+<tr><td><span class="hl green">预防成本</span></td><td>防止不合格发生的投入</td><td>质量培训费、新品设计评审费、质量策划费、供应商辅导费</td></tr>
+<tr><td><span class="hl">鉴定成本</span></td><td>评定产品是否合格的投入</td><td>来料检验费、过程检验费、检测设备折旧、试验费</td></tr>
+<tr><td><span class="hl orange">内部故障成本</span></td><td>交付<span style="text-decoration:underline">前</span>发现不合格的损失</td><td>返工返修费、废品损失、复检费、停线损失</td></tr>
+<tr><td><span class="hl red">外部故障成本</span></td><td>交付<span style="text-decoration:underline">后</span>发现不合格的损失</td><td>维修差旅费、客户索赔费、退货运输费、售后客服人工成本</td></tr>
+</table>
+
+<div class="callout">核心逻辑：<span class="hl green">预防投入</span>↑ → <span class="hl orange">内部故障</span>↓ → <span class="hl red">外部故障</span>↓↓（损失逐级放大）</div>
 </section>
 
 <section class="panel" id="s2">
-<div class="section-num">易错点</div>
+<div class="section-num">2.1.2</div>
 <h2>高频陷阱与易混淆点</h2>
-<div class="cards"><div class="card"><h4>⚠️ 抽样检验相较于全检的优点包括？</h4><p>抽样检验能减少成本、缩短时间，尤其适用于破坏性检验。它不能完全避免质量风险，因此不能保证“零风险”。</p></div><div class="card"><h4>💡 某供应商来料数量大、检验时间紧，且部分检验项目为破...</h4><p>面对问题，首先应组织跨部门分析根因，制定纠正措施。</p></div></div><div class="callout warn">⚠️ 考试注意：仔细审题，注意选项中的关键词差异！</div>
+
+<div class="cards">
+<div class="card"><h4>来料检验费 ≠ 预防成本</h4><p>来料检验费属于<span class="hl">鉴定成本</span>，是评定来料是否合格的费用，不是预防成本。</p></div>
+<div class="card"><h4>售后客服 = 外部故障</h4><p>售后客服人工成本属于<span class="hl red">外部故障成本</span>，容易被忽略。</p></div>
+<div class="card"><h4>设计评审 = 预防</h4><p>新品设计评审费属于<span class="hl green">预防成本</span>，是在问题发生前的投入。</p></div>
+<div class="card"><h4>交付前后是关键</h4><p>区分内部/外部故障的核心标准是<span class="hl orange">产品是否已交付</span>。</p></div>
+</div>
+
+<div class="callout warn">⚠️ 考试高频陷阱：题目常把"来料检验费"混在预防成本选项中，注意甄别！</div>
+</section>
+
+<section class="panel" id="s3">
+<div class="section-num">2.1.3</div>
+<h2>案例：如何通过质量成本管控降低退货损失</h2>
+
+<div class="cards">
+<div class="card"><h4>① 增加预防投入</h4><p>供应商年度质量辅导、新品阶段DFMEA评审、产线员工质量培训</p></div>
+<div class="card"><h4>② 优化鉴定管控</h4><p>针对高频不良增加关键工位专检，提前拦截不良品</p></div>
+<div class="card"><h4>③ 建立故障成本看板</h4><p>外部故障成本月度统计看板，设定退货成本考核指标</p></div>
+<div class="card"><h4>④ 供应商分摊</h4><p>与零部件供应商签订质量赔付协议，分摊不良退货损失</p></div>
+</div>
+
+<div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
 </section>
 
 <section class="panel quiz-section" id="quiz">
 <div class="quiz-title">练习题</div>
-<h2>互动练习题（5道）</h2>
+<h2>互动练习题（8道）</h2>
 
 <div class="question" data-id="q0" data-answer="A" data-type="single">
-<div class="question-header">第1题：抽样检验的本质是？<span class="badge badge-single">单选</span></div>
+<div class="question-header">第1题：抽样检验的本质是？
+- A. 通过少量样本推断总体
+- B. 对全部产品逐个检验
+- C. 只对合格品放行
+- D. 只适用于原材料检验<span class="badge badge-single">单选</span></div>
 <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 通过少量样本推断总体</span></label>
 <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 对全部产品逐个检验</span></label>
 <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 只对合格品放行</span></label>
@@ -131,7 +187,11 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="question" data-id="q1" data-answer="A" data-type="single">
-<div class="question-header">第2题：GB/T 2828.1 主要用于哪类检验？<span class="badge badge-single">单选</span></div>
+<div class="question-header">第2题：GB/T 2828.1 主要用于哪类检验？
+- A. 统计抽样检验
+- B. 过程能力分析
+- C. 失效模式分析
+- D. 管理评审<span class="badge badge-single">单选</span></div>
 <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 统计抽样检验</span></label>
 <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 过程能力分析</span></label>
 <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 失效模式分析</span></label>
@@ -139,27 +199,67 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="question" data-id="q2" data-answer="B" data-type="single">
-<div class="question-header">第3题：在抽样检验中，AQL 的含义最接近于？<span class="badge badge-single">单选</span></div>
+<div class="question-header">第3题：AQL 的含义最接近于？
+- A. 允许的最大报废率
+- B. 可接受的质量水平
+- C. 过程平均值
+- D. 检验员能力等级<span class="badge badge-single">单选</span></div>
 <label class="option-label"><input type="radio" name="q2" value="A"><span>A. 允许的最大报废率</span></label>
 <label class="option-label"><input type="radio" name="q2" value="B"><span>B. 可接受的质量水平</span></label>
 <label class="option-label"><input type="radio" name="q2" value="C"><span>C. 过程平均值</span></label>
 <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 检验员能力等级</span></label>
 </div>
 
-<div class="question" data-id="q3" data-answer="ABC" data-type="multi">
-<div class="question-header">第4题：抽样检验相较于全检的优点包括？<span class="badge badge-multi">多选</span></div>
-<label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 节省检验成本</span></label>
-<label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 缩短检验时间</span></label>
-<label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 适合破坏性检验</span></label>
-<label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 可避免任何质量风险</span></label>
+<div class="question" data-id="q3" data-answer="D" data-type="single">
+<div class="question-header">第4题：抽样检验相较于全检的优势不包括？
+- A. 节省检验成本
+- B. 缩短检验时间
+- C. 适合破坏性检验
+- D. 绝对没有风险<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q3" value="A"><span>A. 节省检验成本</span></label>
+<label class="option-label"><input type="radio" name="q3" value="B"><span>B. 缩短检验时间</span></label>
+<label class="option-label"><input type="radio" name="q3" value="C"><span>C. 适合破坏性检验</span></label>
+<label class="option-label"><input type="radio" name="q3" value="D"><span>D. 绝对没有风险</span></label>
 </div>
 
-<div class="question" data-id="q4" data-answer="C" data-type="single">
-<div class="question-header">第5题（案例）：某供应商来料数量大、检验时间紧，且部分检验项目为破坏性试验。作为质量经理，你会如何设计检验策略？<span class="badge badge-single">单选</span></div>
-<label class="option-label"><input type="radio" name="q4" value="A"><span>A. 立即增加检验频次</span></label>
-<label class="option-label"><input type="radio" name="q4" value="B"><span>B. 加强售后维修团队</span></label>
-<label class="option-label"><input type="radio" name="q4" value="C"><span>C. 组织跨部门分析根因并制定纠正措施</span></label>
-<label class="option-label"><input type="radio" name="q4" value="D"><span>D. 降低产品售价弥补客户</span></label>
+<div class="question" data-id="q4" data-answer="ABC" data-type="multi">
+<div class="question-header">第5题：抽样检验相较于全检的优点包括哪些？
+- A. 节省检验成本
+- B. 缩短检验时间
+- C. 适合破坏性检验
+- D. 适用于所有场景且零风险<span class="badge badge-multi">多选</span></div>
+<label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 节省检验成本</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 缩短检验时间</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 适合破坏性检验</span></label>
+<label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 适用于所有场景且零风险</span></label>
+</div>
+
+<div class="question" data-id="q5" data-answer="ABC" data-type="multi">
+<div class="question-header">第6题：供应商进货检验、驻厂检验和免检目标的关系是？
+- A. 先检验把关
+- B. 再向源头预防延伸
+- C. 最终朝进货免检努力
+- D. 与质量控制无关<span class="badge badge-multi">多选</span></div>
+<label class="option-label"><input type="checkbox" name="q5" value="A"><span>A. 先检验把关</span></label>
+<label class="option-label"><input type="checkbox" name="q5" value="B"><span>B. 再向源头预防延伸</span></label>
+<label class="option-label"><input type="checkbox" name="q5" value="C"><span>C. 最终朝进货免检努力</span></label>
+<label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 与质量控制无关</span></label>
+</div>
+
+<div class="question" data-id="q6" data-answer="A" data-type="single">
+<div class="question-header">第7题：<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q6" value="A"><span>A. 案例题：请查看参考答案</span></label>
+<label class="option-label"><input type="radio" name="q6" value="B"><span>B. 案例题：请查看参考答案</span></label>
+<label class="option-label"><input type="radio" name="q6" value="C"><span>C. 案例题：请查看参考答案</span></label>
+<label class="option-label"><input type="radio" name="q6" value="D"><span>D. 案例题：请查看参考答案</span></label>
+</div>
+
+<div class="question" data-id="q7" data-answer="A" data-type="single">
+<div class="question-header">第8题：<span class="badge badge-single">单选</span></div>
+<label class="option-label"><input type="radio" name="q7" value="A"><span>A. 案例题：请查看参考答案</span></label>
+<label class="option-label"><input type="radio" name="q7" value="B"><span>B. 案例题：请查看参考答案</span></label>
+<label class="option-label"><input type="radio" name="q7" value="C"><span>C. 案例题：请查看参考答案</span></label>
+<label class="option-label"><input type="radio" name="q7" value="D"><span>D. 案例题：请查看参考答案</span></label>
 </div>
 
 <div class="submit-wrap"><button class="submit-btn" type="button" id="submitBtn">提交答案</button></div>
@@ -171,9 +271,51 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <footer class="footer"><p>© 质量经理手册互动练习</p><div class="sign">⚡ 与你同行 AI 浪潮，打造智能工作新范式</div></footer>
 
 <script>
-var explanations={"q0":"抽样检验是从总体中抽取部分样本进行检验，并据此推断总体质量状况。它不能完全替代全检，但可显著降低检验成本。","q1":"GB/T 2828.1 是最常见的计数抽样检验标准，用于按接收质量限（AQL）进行批量产品的抽样判定。","q2":"AQL（Acceptable Quality Level）通常译为可接受质量限或可接受质量水平，是抽样检验中用于制定接收准则的重要参数。","q3":"抽样检验能减少成本、缩短时间，尤其适用于破坏性检验。它不能完全避免质量风险，因此不能保证“零风险”。","q4":"面对问题，首先应组织跨部门分析根因，制定纠正措施。"};
-var questions=[{"id":"q0","text":"抽样检验的本质是？"},{"id":"q1","text":"GB/T 2828.1 主要用于哪类检验？"},{"id":"q2","text":"在抽样检验中，AQL 的含义最接近于？"},{"id":"q3","text":"抽样检验相较于全检的优点包括？"},{"id":"q4","text":"某供应商来料数量大、检验时间紧，且部分检验项目为破坏性试验。作为质量经理，你会如何设计检验策略？"}];
-
+var explanations={
+q0:"抽样检验是从总体中抽取部分样本进行检验，据此推断总体质量状况。",
+q1:"GB/T 2828.1是最常见的计数抽样检验标准。",
+q2:"AQL是可接受质量限或可接受质量水平。",
+q3:"抽样检验不能保证绝对没有风险。",
+q4:"抽样检验能降成本、提效率、适合破坏性检验，但有风险。",
+q5:"供应商质量控制由检验把关向源头预防延伸，最终朝免检目标努力。",
+q6:"抽样检验特别适合批量和破坏性场景，但不能忽视风险管理。",
+q7:"免检建立在管理体系健全、过程能力稳定、质量问题可控的基础上。"
+};
+var questions=[
+{id:'q0',text:"抽样检验的本质是？
+- A. 通过少量样本推断总体
+- B. 对全部产品逐个检验
+- C. 只对合格品放行
+- D. 只适用于原材料检验"},
+{id:'q1',text:"GB/T 2828.1 主要用于哪类检验？
+- A. 统计抽样检验
+- B. 过程能力分析
+- C. 失效模式分析
+- D. 管理评审"},
+{id:'q2',text:"AQL 的含义最接近于？
+- A. 允许的最大报废率
+- B. 可接受的质量水平
+- C. 过程平均值
+- D. 检验员能力等级"},
+{id:'q3',text:"抽样检验相较于全检的优势不包括？
+- A. 节省检验成本
+- B. 缩短检验时间
+- C. 适合破坏性检验
+- D. 绝对没有风险"},
+{id:'q4',text:"抽样检验相较于全检的优点包括哪些？
+- A. 节省检验成本
+- B. 缩短检验时间
+- C. 适合破坏性检验
+- D. 适用于所有场景且零风险"},
+{id:'q5',text:"供应商进货检验、驻厂检验和免检目标的关系是？
+- A. 先检验把关
+- B. 再向源头预防延伸
+- C. 最终朝进货免检努力
+- D. 与质量控制无关"},
+{id:'q6',text:""},
+{id:'q7',text:""}
+];
+// 改进的提交函数
 function submitQuiz(){
   try {
     let score=0,html='';
@@ -181,9 +323,8 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');
-      const correctSorted=correct.split('').sort().join('');
-      const ok=checked===correctSorted;
+      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+      const ok=checked===correct;
       if(ok)score++;
       html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
       html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
@@ -205,6 +346,7 @@ function submitQuiz(){
   }
 }
 
+// 绑定按钮事件（兼容PC和移动端）
 (function(){
   function bindBtn(){
     var btn=document.getElementById('submitBtn');
@@ -217,3 +359,4 @@ function submitQuiz(){
 </script>
 </body>
 </html>
+<!-- force rebuild Mon Jun 29 10:58:45 UTC 2026 -->
