@@ -257,13 +257,13 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 
 </div>
 
-<div class="question" data-id="q6" data-answer="" data-type="case">
+<div class="question" data-id="q6" data-answer="" data-keywords="供应商评审,来料检验,质量协议,辅导,改善,停线,绩效评价,合格供应商" data-type="case">
 <div class="question-header">第7题：某企业外购件不良频发，导致产线停线。请从供应商管理角度提出改善方案。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="" data-type="case">
+<div class="question" data-id="q7" data-answer="" data-keywords="总成本,质量成本,供应商评价,综合成本,长期合作,采购单价,全生命周期" data-type="case">
 <div class="question-header">第8题：某公司长期只看采购单价，导致总成本反而上升。请指出问题并提出正确管理思路。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
@@ -308,19 +308,29 @@ function submitQuiz(){
       if(q.type==='case'){
         var textarea=box.querySelector('.case-answer');
         var userAnswer=textarea?textarea.value.trim():'';
-        html+='<div class="result-card result-wrong">';
-        html+='<div style="font-weight:600;margin-bottom:6px">\ud83d\udcdd 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
-        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
-        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+(correct||'请参考解析')+'</span></div>';
+        var keywords=box.getAttribute('data-keywords')||'';
+        var keywordList=keywords.split(',').filter(function(k){return k.trim();});
+        var matchCount=0;
+        keywordList.forEach(function(kw){
+          if(userAnswer.indexOf(kw.trim())!==-1) matchCount++;
+        });
+        var matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        var passed=matchRate>=0.5;
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'\u2705':'\u274c')+' \u7b2c'+(idx+1)+'\u9898\uff08\u6848\u4f8b\uff09\uff1a'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>\u4f60\u7684\u7b54\u6848\uff1a</strong><span style="color:#555">'+(userAnswer||'\u672a\u4f5c\u7b54')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>\u5173\u952e\u8bcd\u5339\u914d\uff1a</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>\u53c2\u8003\u7b54\u6848\uff1a</strong><span style="color:#16a34a;font-weight:600">'+(correct||'\u8bf7\u53c2\u8003\u89e3\u6790')+'</span></div>';
         html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
       } else {
         var checked=[].map.call(box.querySelectorAll('input:checked'),function(x){return x.value}).join('');
         var ok=checked===correct;
         if(ok)score++;
         html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'\u2705':'\u274c')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> \u2705</div>';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'\u2705':'\u274c')+' \u7b2c'+(idx+1)+'\u9898\uff1a'+q.text+'</div>';
+        if(!ok)html+='<div>\u4f60\u7684\u7b54\u6848\uff1a<span style="color:#ef4444">'+(checked||'\u672a\u4f5c\u7b54')+'</span> | \u6b63\u786e\u7b54\u6848\uff1a<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>\u7b54\u6848\uff1a<span style="color:#16a34a;font-weight:600">'+correct+'</span> \u2705</div>';
         html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
       }
     });
@@ -328,15 +338,15 @@ function submitQuiz(){
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    var totalChoice=questions.filter(function(q){return q.type!=='case'}).length;
-    if(scoreBar) scoreBar.textContent='选择题得分：'+score+' / '+totalChoice+(score===totalChoice?' \ud83c\udf89 满分！':'');
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='\u5f97\u5206:'+score+' / '+totalQuestions+(score===totalQuestions?' \ud83c\udf89 \u6ee1\u5206!':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
-    if(submitBtn){submitBtn.textContent='已提交 \u2713';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
+    if(submitBtn){submitBtn.textContent='\u5df2\u63d0\u4ea4 \u2713';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
     document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
-    alert('提交出错，请刷新页面重试：'+e.message);
+    alert('\u63d0\u4ea4\u51fa\u9519\uff0c\u8bf7\u5237\u65b0\u9875\u9762\u91cd\u8bd5\uff1a'+e.message);
   }
 }
 
