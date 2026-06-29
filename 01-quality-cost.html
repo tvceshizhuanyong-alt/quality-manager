@@ -85,6 +85,11 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .result-correct{background:#dcfce7;border:1px solid #86efac}
 .result-wrong{background:#fee2e2;border:1px solid #fca5a5}
 
+.case-answer{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px}
+.case-answer:disabled{background:#f5f5f5;cursor:not-allowed}
+.char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
+.badge-case{background:#fef3c7;color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
@@ -247,65 +252,84 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <footer class="footer"><p>© 质量经理手册互动练习</p><div class="sign">⚡ 与你同行 AI 浪潮，打造智能工作新范式</div></footer>
 
 <script>
-var explanations={
-q0:"教材原文：产品交付后发现不合格产生的损失属于外部故障成本。包括维修费、退货运输费、客户索赔费等。内部故障成本是交付前发现的。",
+var explanations={q0:"教材原文：产品交付后发现不合格产生的损失属于外部故障成本。包括维修费、退货运输费、客户索赔费等。内部故障成本是交付前发现的。",
 q1:"教材原文：预防成本是为防止不合格发生而投入的费用，包括质量培训费、新品设计评审费、质量策划费、供应商辅导费等。来料检验费属于鉴定成本（评定产品是否合格），不属于预防成本。",
 q2:"教材原文：外部故障成本是产品交付后发现不合格产生的全部损失，包括产品维修差旅费、客户索赔费用、退货运输费、售后客服人工成本等。注意：售后客服人工成本也属于外部故障成本，容易被忽略。",
 q3:"教材原文：质量经济性是指质量投入与组织收益的平衡关系，不是单纯降低某一类成本。最优策略是加大预防投入，使总质量成本最小化。",
-q4:"教材原文：质量成本的杠杆关系——预防投入↑→内部故障↓→外部故障↓↓。外部故障成本通常是内部故障成本的3-10倍，因此从源头预防是最经济的策略。"
-,
+q4:"教材原文：质量成本的杠杆关系——预防投入↑→内部故障↓→外部故障↓↓。外部故障成本通常是内部故障成本的3-10倍，因此从源头预防是最经济的策略。",
 q5:"面对退货上涨，首先应组织跨部门分析会，用5Why定位根因，区分制程问题和来料问题，分别制定纠正措施。增加检验频次是短期措施，不是根本解决方案；降价不能解决质量问题。",
 q6:"教材原文：质量成本分为预防成本、鉴定成本、内部故障成本、外部故障成本四类。其中外部故障成本通常是内部故障成本的3-10倍，因此加大预防投入是最经济的策略。",
-q7:"教材原文：质量成本管理的核心是找到预防成本与故障成本的最佳平衡点，使总质量成本最小化。不是单纯追求某一类成本最低。"
-};
+q7:"教材原文：质量成本管理的核心是找到预防成本与故障成本的最佳平衡点，使总质量成本最小化。不是单纯追求某一类成本最低。"};
 var questions=[
-{id:'q0',text:'产品交付后客户投诉产生的维修费用属于哪类质量成本？'},
-{id:'q1',text:'以下哪些属于预防成本？'},
-{id:'q2',text:'以下哪些属于外部故障成本？'},
-{id:'q3',text:'质量经济性的定义是什么？'},
-{id:'q4',text:'降低质量成本最有效的策略是什么？'}
-,
-{id:'q5',text:'案例：某企业近半年客户退货量同比上涨30%，退货集中在外壳装配缝隙、按键失灵两类问题。作为质量经理，首先应采取的措施是？'},
-{id:'q6',text:'质量成本分为哪几类？'},
-{id:'q7',text:'质量成本管理的核心目标是什么？'}
+{id:'q0',text:'产品交付后客户投诉产生的维修费用属于哪类质量成本？',type:'single'},
+{id:'q1',text:'以下哪些属于预防成本？',type:'single'},
+{id:'q2',text:'以下哪些属于外部故障成本？',type:'single'},
+{id:'q3',text:'质量经济性的定义是什么？',type:'single'},
+{id:'q4',text:'降低质量成本最有效的策略是什么？',type:'multi'},
+{id:'q5',text:'案例：某企业近半年客户退货量同比上涨30%，退货集中在外壳装配缝隙、按键失灵两类问题。作为质量经理，首先应采取的措施是？',type:'multi'},
+{id:'q6',text:'质量成本分为哪几类？',type:'multi'},
+{id:'q7',text:'质量成本管理的核心目标是什么？',type:'single'}
 ];
-// 改进的提交函数
+
 function submitQuiz(){
   try {
-    let score=0,html='';
-    questions.forEach((q,idx)=>{
-      const box=document.querySelector('.question[data-id="'+q.id+'"]');
+    var score=0,html='';
+    questions.forEach(function(q,idx){
+      var box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
-      const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      var correct=box.getAttribute('data-answer');
+      
+      if(q.type==='case'){
+        var textarea=box.querySelector('.case-answer');
+        var userAnswer=textarea?textarea.value.trim():'';
+        html+='<div class="result-card result-wrong">';
+        html+='<div style="font-weight:600;margin-bottom:6px">\ud83d\udcdd 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+(correct||'请参考解析')+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        var checked=[].map.call(box.querySelectorAll('input:checked'),function(x){return x.value}).join('');
+        var ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'\u2705':'\u274c')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> \u2705</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    var totalChoice=questions.filter(function(q){return q.type!=='case'}).length;
+    if(scoreBar) scoreBar.textContent='选择题得分：'+score+' / '+totalChoice+(score===totalChoice?' \ud83c\udf89 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
-    if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
+    if(submitBtn){submitBtn.textContent='已提交 \u2713';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错，请刷新页面重试：'+e.message);
   }
 }
 
-// 绑定按钮事件（兼容PC和移动端）
+function updateCharCount(){
+  document.querySelectorAll('.case-answer').forEach(function(ta){
+    var count=ta.value.length;
+    var countDiv=ta.parentElement.querySelector('.char-count');
+    if(countDiv) countDiv.textContent=count+'/200';
+  });
+}
+
 (function(){
   function bindBtn(){
     var btn=document.getElementById('submitBtn');
     if(!btn) return;
     btn.addEventListener('click',function(e){e.preventDefault();if(!this.disabled)submitQuiz();},false);
+    document.querySelectorAll('.case-answer').forEach(function(ta){
+      ta.addEventListener('input',updateCharCount);
+    });
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bindBtn);}
   else{bindBtn();}

@@ -85,6 +85,11 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .result-correct{background:#dcfce7;border:1px solid #86efac}
 .result-wrong{background:#fee2e2;border:1px solid #fca5a5}
 
+.case-answer{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px}
+.case-answer:disabled{background:#f5f5f5;cursor:not-allowed}
+.char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
+.badge-case{background:#fef3c7;color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
@@ -252,14 +257,16 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 
 </div>
 
-<div class="question" data-id="q6" data-answer="" data-type="multi">
-<div class="question-header">第7题：某公司内部审核总是流于形式，问题重复发生。请说明内部审核如何真正发挥作用。<span class="badge badge-multi">多选</span></div>
-
+<div class="question" data-id="q6" data-answer="" data-type="case">
+<div class="question-header">第7题：某公司内部审核总是流于形式，问题重复发生。请说明内部审核如何真正发挥作用。<span class="badge badge-case">案例</span></div>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="" data-type="multi">
-<div class="question-header">第8题：某部门负责人自己审核自己部门，导致结果失真。请说明违背了什么原则，并如何纠正。<span class="badge badge-multi">多选</span></div>
-
+<div class="question" data-id="q7" data-answer="" data-type="case">
+<div class="question-header">第8题：某部门负责人自己审核自己部门，导致结果失真。请说明违背了什么原则，并如何纠正。<span class="badge badge-case">案例</span></div>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
 <div class="submit-wrap"><button class="submit-btn" type="button" id="submitBtn">提交答案</button></div>
@@ -277,55 +284,78 @@ q2:"第三方管理体系审核后续活动是不符合项整改验证。",
 q3:"内部审核用于验证质量管理体系的符合性与有效性。",
 q4:"内部审核应具备独立性、客观性、覆盖性。",
 q5:"文件评审属于准备阶段，现场取证、不符合项沟通、末次会议属于实施阶段。",
-q6:"",
-q7:""};
+q6:"案例题解析：请结合本章知识点，从问题分析、原因定位、改进措施、效果验证等方面系统作答。",
+q7:"案例题解析：请结合本章知识点，从问题分析、原因定位、改进措施、效果验证等方面系统作答。"};
 var questions=[
-{id:'q0',text:'内部体系审核人员必须满足？'},
-{id:'q1',text:'管理体系审核六大阶段，不属于审核实施环节的是？'},
-{id:'q2',text:'第三方管理体系审核后续活动是？'},
-{id:'q3',text:'内部审核的核心目的是什么？'},
-{id:'q4',text:'内部审核的基本要求包括？'},
-{id:'q5',text:'审核实施阶段常见活动有？'},
-{id:'q6',text:'某公司内部审核总是流于形式，问题重复发生。请说明内部审核如何真正发挥作用。'},
-{id:'q7',text:'某部门负责人自己审核自己部门，导致结果失真。请说明违背了什么原则，并如何纠正。'}
+{id:'q0',text:'内部体系审核人员必须满足？',type:'single'},
+{id:'q1',text:'管理体系审核六大阶段，不属于审核实施环节的是？',type:'single'},
+{id:'q2',text:'第三方管理体系审核后续活动是？',type:'single'},
+{id:'q3',text:'内部审核的核心目的是什么？',type:'single'},
+{id:'q4',text:'内部审核的基本要求包括？',type:'multi'},
+{id:'q5',text:'审核实施阶段常见活动有？',type:'multi'},
+{id:'q6',text:'某公司内部审核总是流于形式，问题重复发生。请说明内部审核如何真正发挥作用。',type:'case'},
+{id:'q7',text:'某部门负责人自己审核自己部门，导致结果失真。请说明违背了什么原则，并如何纠正。',type:'case'}
 ];
-// 改进的提交函数
+
 function submitQuiz(){
   try {
-    let score=0,html='';
-    questions.forEach((q,idx)=>{
-      const box=document.querySelector('.question[data-id="'+q.id+'"]');
+    var score=0,html='';
+    questions.forEach(function(q,idx){
+      var box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
-      const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      var correct=box.getAttribute('data-answer');
+      
+      if(q.type==='case'){
+        var textarea=box.querySelector('.case-answer');
+        var userAnswer=textarea?textarea.value.trim():'';
+        html+='<div class="result-card result-wrong">';
+        html+='<div style="font-weight:600;margin-bottom:6px">\ud83d\udcdd 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+(correct||'请参考解析')+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        var checked=[].map.call(box.querySelectorAll('input:checked'),function(x){return x.value}).join('');
+        var ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'\u2705':'\u274c')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> \u2705</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    var totalChoice=questions.filter(function(q){return q.type!=='case'}).length;
+    if(scoreBar) scoreBar.textContent='选择题得分：'+score+' / '+totalChoice+(score===totalChoice?' \ud83c\udf89 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
-    if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
+    if(submitBtn){submitBtn.textContent='已提交 \u2713';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错，请刷新页面重试：'+e.message);
   }
 }
 
-// 绑定按钮事件（兼容PC和移动端）
+function updateCharCount(){
+  document.querySelectorAll('.case-answer').forEach(function(ta){
+    var count=ta.value.length;
+    var countDiv=ta.parentElement.querySelector('.char-count');
+    if(countDiv) countDiv.textContent=count+'/200';
+  });
+}
+
 (function(){
   function bindBtn(){
     var btn=document.getElementById('submitBtn');
     if(!btn) return;
     btn.addEventListener('click',function(e){e.preventDefault();if(!this.disabled)submitQuiz();},false);
+    document.querySelectorAll('.case-answer').forEach(function(ta){
+      ta.addEventListener('input',updateCharCount);
+    });
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bindBtn);}
   else{bindBtn();}

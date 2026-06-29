@@ -85,6 +85,11 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .result-correct{background:#dcfce7;border:1px solid #86efac}
 .result-wrong{background:#fee2e2;border:1px solid #fca5a5}
 
+.case-answer{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px}
+.case-answer:disabled{background:#f5f5f5;cursor:not-allowed}
+.char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
+.badge-case{background:#fef3c7;color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
@@ -252,14 +257,16 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 
 </div>
 
-<div class="question" data-id="q6" data-answer="" data-type="multi">
-<div class="question-header">第7题：某企业外购件不良频发，导致产线停线。请从供应商管理角度提出改善方案。<span class="badge badge-multi">多选</span></div>
-
+<div class="question" data-id="q6" data-answer="" data-type="case">
+<div class="question-header">第7题：某企业外购件不良频发，导致产线停线。请从供应商管理角度提出改善方案。<span class="badge badge-case">案例</span></div>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="" data-type="multi">
-<div class="question-header">第8题：某公司长期只看采购单价，导致总成本反而上升。请指出问题并提出正确管理思路。<span class="badge badge-multi">多选</span></div>
-
+<div class="question" data-id="q7" data-answer="" data-type="case">
+<div class="question-header">第8题：某公司长期只看采购单价，导致总成本反而上升。请指出问题并提出正确管理思路。<span class="badge badge-case">案例</span></div>
+<textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
+<div class="char-count">0/200</div>
 </div>
 
 <div class="submit-wrap"><button class="submit-btn" type="button" id="submitBtn">提交答案</button></div>
@@ -277,55 +284,78 @@ q2:"供应商管理强调从全生命周期出发，使总成本最小化。",
 q3:"供应商管理强调合作共赢。",
 q4:"供方绩效评价常看质量、交付和售后相关指标。",
 q5:"供应商管理重在辅导、联合改善和协议约束，而非一味压价。",
-q6:"",
-q7:""};
+q6:"案例题解析：请结合本章知识点，从问题分析、原因定位、改进措施、效果验证等方面系统作答。",
+q7:"案例题解析：请结合本章知识点，从问题分析、原因定位、改进措施、效果验证等方面系统作答。"};
 var questions=[
-{id:'q0',text:'供应商准入阶段质量管控核心文件是？'},
-{id:'q1',text:'供方年度绩效评价不包含？'},
-{id:'q2',text:'供应商管理的核心关注点之一是？'},
-{id:'q3',text:'供应商管理更强调哪类关系？'},
-{id:'q4',text:'以下可用于供方绩效评价的指标有？'},
-{id:'q5',text:'供应商管理中常见的改进动作有？'},
-{id:'q6',text:'某企业外购件不良频发，导致产线停线。请从供应商管理角度提出改善方案。'},
-{id:'q7',text:'某公司长期只看采购单价，导致总成本反而上升。请指出问题并提出正确管理思路。'}
+{id:'q0',text:'供应商准入阶段质量管控核心文件是？',type:'single'},
+{id:'q1',text:'供方年度绩效评价不包含？',type:'single'},
+{id:'q2',text:'供应商管理的核心关注点之一是？',type:'single'},
+{id:'q3',text:'供应商管理更强调哪类关系？',type:'single'},
+{id:'q4',text:'以下可用于供方绩效评价的指标有？',type:'multi'},
+{id:'q5',text:'供应商管理中常见的改进动作有？',type:'multi'},
+{id:'q6',text:'某企业外购件不良频发，导致产线停线。请从供应商管理角度提出改善方案。',type:'case'},
+{id:'q7',text:'某公司长期只看采购单价，导致总成本反而上升。请指出问题并提出正确管理思路。',type:'case'}
 ];
-// 改进的提交函数
+
 function submitQuiz(){
   try {
-    let score=0,html='';
-    questions.forEach((q,idx)=>{
-      const box=document.querySelector('.question[data-id="'+q.id+'"]');
+    var score=0,html='';
+    questions.forEach(function(q,idx){
+      var box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
-      const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      var correct=box.getAttribute('data-answer');
+      
+      if(q.type==='case'){
+        var textarea=box.querySelector('.case-answer');
+        var userAnswer=textarea?textarea.value.trim():'';
+        html+='<div class="result-card result-wrong">';
+        html+='<div style="font-weight:600;margin-bottom:6px">\ud83d\udcdd 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+(correct||'请参考解析')+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        var checked=[].map.call(box.querySelectorAll('input:checked'),function(x){return x.value}).join('');
+        var ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'\u2705':'\u274c')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> \u2705</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    var totalChoice=questions.filter(function(q){return q.type!=='case'}).length;
+    if(scoreBar) scoreBar.textContent='选择题得分：'+score+' / '+totalChoice+(score===totalChoice?' \ud83c\udf89 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
-    if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
+    if(submitBtn){submitBtn.textContent='已提交 \u2713';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错，请刷新页面重试：'+e.message);
   }
 }
 
-// 绑定按钮事件（兼容PC和移动端）
+function updateCharCount(){
+  document.querySelectorAll('.case-answer').forEach(function(ta){
+    var count=ta.value.length;
+    var countDiv=ta.parentElement.querySelector('.char-count');
+    if(countDiv) countDiv.textContent=count+'/200';
+  });
+}
+
 (function(){
   function bindBtn(){
     var btn=document.getElementById('submitBtn');
     if(!btn) return;
     btn.addEventListener('click',function(e){e.preventDefault();if(!this.disabled)submitQuiz();},false);
+    document.querySelectorAll('.case-answer').forEach(function(ta){
+      ta.addEventListener('input',updateCharCount);
+    });
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bindBtn);}
   else{bindBtn();}
