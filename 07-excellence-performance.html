@@ -255,13 +255,13 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 
 </div>
 
-<div class="question" data-id="q6" data-answer="1.识别当前体系与卓越绩效模式的差距；2.从战略导向、顾客驱动、过程管理等方面系统改进；3.建立结果导向的评价机制；4.持续跟踪改进效果。" data-type="case">
+<div class="question" data-id="q6" data-answer="1.识别当前体系与卓越绩效模式的差距；2.从战略导向、顾客驱动、过程管理等方面系统改进；3.建立结果导向的评价机制；4.持续跟踪改进效果。" data-keywords="差距,战略导向,顾客驱动,过程管理,结果导向,系统改进,评价机制,持续" data-type="case">
 <div class="question-header">第7题（案例）：某公司质量体系运行多年，但经营结果提升不明显。请结合卓越绩效模式提出提升建议。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="1.文件合规只关注"有没有"，不关注"好不好"；2.缺乏结果导向和成熟度评价；3.无法驱动系统性改进；4.不能帮助组织追求卓越经营。" data-type="case">
+<div class="question" data-id="q7" data-answer="1.文件合规只关注有没有，不关注好不好；2.缺乏结果导向和成熟度评价；3.无法驱动系统性改进；4.不能帮助组织追求卓越经营。" data-keywords="文件合规,结果导向,成熟度,系统性改进,卓越经营,局限,评价" data-type="case">
 <div class="question-header">第8题（案例）：某企业想用"只做文件合规"替代卓越绩效评价。请说明其局限。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
@@ -304,12 +304,22 @@ function submitQuiz(){
       const correct=box.getAttribute('data-answer');
       
       if(q.type==='case'){
-        // 案例题：显示用户输入和参考答案
+        // 案例题：关键词匹配判分
         const textarea=box.querySelector('.case-answer');
         const userAnswer=textarea?textarea.value.trim():'';
-        html+='<div class="result-card result-wrong">';
-        html+='<div style="font-weight:600;margin-bottom:6px">📝 第'+(idx+1)+'题（案例）:'+q.text+'</div>';
+        const keywords=box.getAttribute('data-keywords')||'';
+        const keywordList=keywords.split(',').filter(k=>k.trim());
+        let matchCount=0;
+        keywordList.forEach(kw=>{
+          if(userAnswer.includes(kw.trim())) matchCount++;
+        });
+        const matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        const passed=matchRate>=0.5; // 至少匹配50%关键词
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'✅':'❌')+' 第'+(idx+1)+'题（案例）:'+q.text+'</div>';
         html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>关键词匹配：</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
         html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
         html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
       } else {
@@ -328,9 +338,9 @@ function submitQuiz(){
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    // 计算选择题得分
-    var totalChoice=questions.filter(q=>q.type!=='case').length;
-    if(scoreBar) scoreBar.textContent='选择题得分:'+score+' / '+totalChoice+(score===totalChoice?' 🎉 满分!':'');
+    // 计算总分（选择题+案例题）
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='得分:'+score+' / '+totalQuestions+(score===totalQuestions?' 🎉 满分!':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
