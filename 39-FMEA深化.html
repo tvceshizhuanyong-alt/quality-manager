@@ -250,14 +250,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 替代全部质量管理活动</span></label>
 </div>
 
-<div class="question" data-id="q6" data-answer="A" data-type="case">
-<div class="question-header">第7题：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q6" data-answer="FMEA的价值在于前瞻性风险管理，并与控制计划联动，提前识别和降低潜在风险。" data-keywords="前瞻性,风险管理,控制计划,FMEA,联动,潜在风险" data-type="case">
+<div class="question-header">第7题：FMEA的价值是什么？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="A" data-type="case">
-<div class="question-header">第8题：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q7" data-answer="FMEA的核心是识别、评估、行动、更新的闭环流程，持续迭代而非一次性完成。" data-keywords="识别,评估,行动,更新,FMEA,闭环,迭代" data-type="case">
+<div class="question-header">第8题：FMEA的核心流程是什么？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
@@ -278,8 +278,8 @@ q2:"严重度通常是FMEA中最优先关注的维度。",
 q3:"FMEA经典评价包括严重度、发生度和探测度。",
 q4:"FMEA经典评价通常包括严重度、发生度和探测度。",
 q5:"FMEA用于前瞻性风险管理，不能替代全部质量管理活动。",
-q6:"FMEA的价值在于前瞻性风险管理，并与控制计划联动。",
-q7:"FMEA的核心是“识别—评估—行动—更新”。"
+q6:"FMEA的价值在于前瞻性风险管理，并与控制计划联动，提前识别和降低潜在风险。",
+q7:"FMEA的核心是识别、评估、行动、更新的闭环流程，持续迭代而非一次性完成。"
 };
 var questions=[
 {id:'q0',text:"FMEA 中 RPN 通常表示什么？
@@ -312,8 +312,8 @@ var questions=[
 - B. 评估风险优先级
 - C. 指导预防措施
 - D. 替代全部质量管理活动"},
-{id:'q6',text:'案例题'},
-{id:'q7',text:'案例题'}
+{id:'q6',text:'FMEA的价值是什么？',type:'case'},
+{id:'q7',text:'FMEA的核心流程是什么？',type:'case'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -323,24 +323,50 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      
+      if(q.type==='case'){
+        // 案例题：关键词匹配判分
+        const textarea=box.querySelector('.case-answer');
+        const userAnswer=textarea?textarea.value.trim():'';
+        const keywords=box.getAttribute('data-keywords')||'';
+        const keywordList=keywords.split(',').filter(k=>k.trim());
+        let matchCount=0;
+        keywordList.forEach(kw=>{
+          if(userAnswer.includes(kw.trim())) matchCount++;
+        });
+        const matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        const passed=matchRate>=0.5; // 至少匹配50%关键词
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'✅':'❌')+' 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>关键词匹配：</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        // 选择题：原有逻辑
+        const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+        const ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    // 计算总分（选择题+案例题）
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+totalQuestions+(score===totalQuestions?' 🎉 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错，请刷新页面重试：'+e.message);
   }

@@ -5,7 +5,6 @@ import re
 import os
 
 # Define case question data for each day
-# Format: { filename: { q6: {answer, keywords, question_text}, q7: {answer, keywords, question_text} } }
 CASE_DATA = {
     "21-过程管理.html": {
         "q6": {
@@ -249,8 +248,10 @@ CASE_DATA = {
     }
 }
 
-# The new JavaScript submitQuiz function that handles case-type questions
-NEW_JS_FUNC = r'''// 改进的提交函数
+BASE_DIR = "/home/node/.openclaw/workspace-quality-manager-handbook/quiz-pages"
+
+# The new JavaScript submitQuiz function
+NEW_JS_FUNC = '''// 改进的提交函数
 function submitQuiz(){
   try {
     let score=0,html='';
@@ -307,7 +308,6 @@ function submitQuiz(){
   }
 }'''
 
-BASE_DIR = "/home/node/.openclaw/workspace-quality-manager-handbook/quiz-pages"
 
 def update_file(filename, case_info):
     filepath = os.path.join(BASE_DIR, filename)
@@ -317,63 +317,50 @@ def update_file(filename, case_info):
     original = content
     
     # 1. Update q6 case question div - add data-keywords and data-answer
-    # Pattern: <div class="question" data-id="q6" data-answer="A" data-type="case">
-    content = re.sub(
-        r'<div class="question" data-id="q6" data-answer="A" data-type="case">',
-        f'<div class="question" data-id="q6" data-answer="{case_info["q6"]["answer"]}" data-keywords="{case_info["q6"]["keywords"]}" data-type="case">',
-        content
-    )
+    old_q6 = '<div class="question" data-id="q6" data-answer="A" data-type="case">'
+    new_q6 = f'<div class="question" data-id="q6" data-answer="{case_info["q6"]["answer"]}" data-keywords="{case_info["q6"]["keywords"]}" data-type="case">'
+    content = content.replace(old_q6, new_q6)
     
     # 2. Update q7 case question div
-    content = re.sub(
-        r'<div class="question" data-id="q7" data-answer="A" data-type="case">',
-        f'<div class="question" data-id="q7" data-answer="{case_info["q7"]["answer"]}" data-keywords="{case_info["q7"]["keywords"]}" data-type="case">',
-        content
-    )
+    old_q7 = '<div class="question" data-id="q7" data-answer="A" data-type="case">'
+    new_q7 = f'<div class="question" data-id="q7" data-answer="{case_info["q7"]["answer"]}" data-keywords="{case_info["q7"]["keywords"]}" data-type="case">'
+    content = content.replace(old_q7, new_q7)
     
     # 3. Update q6 question header text
-    content = re.sub(
-        r'(<div class="question-header">第7题：)<span class="badge badge-case">案例</span>',
-        f'\\1{case_info["q6"]["text"]}<span class="badge badge-case">案例</span>',
-        content
-    )
+    old_header6 = '<div class="question-header">第7题：<span class="badge badge-case">案例</span>'
+    new_header6 = f'<div class="question-header">第7题：{case_info["q6"]["text"]}<span class="badge badge-case">案例</span>'
+    content = content.replace(old_header6, new_header6)
     
     # 4. Update q7 question header text
-    content = re.sub(
-        r'(<div class="question-header">第8题：)<span class="badge badge-case">案例</span>',
-        f'\\1{case_info["q7"]["text"]}<span class="badge badge-case">案例</span>',
-        content
-    )
+    old_header7 = '<div class="question-header">第8题：<span class="badge badge-case">案例</span>'
+    new_header7 = f'<div class="question-header">第8题：{case_info["q7"]["text"]}<span class="badge badge-case">案例</span>'
+    content = content.replace(old_header7, new_header7)
     
     # 5. Update the questions array to include type:'case' for q6 and q7
-    # Replace the q6 entry in questions array
-    content = re.sub(
-        r"\{id:'q6',text:'案例题'\}",
-        f"{{id:'q6',text:'{case_info['q6']['text']}',type:'case'}}",
-        content
-    )
-    content = re.sub(
-        r"\{id:'q7',text:'案例题'\}",
-        f"{{id:'q7',text:'{case_info['q7']['text']}',type:'case'}}",
-        content
-    )
+    old_q6_entry = "{id:'q6',text:'案例题'}"
+    new_q6_entry = f"{{id:'q6',text:'{case_info['q6']['text']}',type:'case'}}"
+    content = content.replace(old_q6_entry, new_q6_entry)
+    
+    old_q7_entry = "{id:'q7',text:'案例题'}"
+    new_q7_entry = f"{{id:'q7',text:'{case_info['q7']['text']}',type:'case'}}"
+    content = content.replace(old_q7_entry, new_q7_entry)
     
     # 6. Replace the submitQuiz function with the new one that handles case-type
-    # Find the old submitQuiz function and replace it
+    # Use regex to find and replace the old function
     old_func_pattern = r'// 改进的提交函数\nfunction submitQuiz\(\)\{.*?\n\}'
-    content = re.sub(old_func_pattern, lambda m: NEW_JS_FUNC, content, flags=re.DOTALL)
+    content = re.sub(old_func_pattern, NEW_JS_FUNC, content, flags=re.DOTALL)
     
-    # 7. Also update explanations for q6 and q7 to match the reference answers
-    # Update q6 explanation
+    # 7. Update explanations for q6 and q7
+    # Find the explanations object and update q6 and q7
+    # Pattern: q6:"...",  -> replace the content
     content = re.sub(
-        r'(q6:")([^"]*?)(",)',
-        lambda m: 'q6:"' + case_info["q6"]["answer"].replace('\\', '\\\\') + '",',
+        r'q6:"[^"]*"',
+        f'q6:"{case_info["q6"]["answer"]}"',
         content
     )
-    # Update q7 explanation
     content = re.sub(
-        r'(q7:")([^"]*?)(")',
-        lambda m: 'q7:"' + case_info["q7"]["answer"].replace('\\', '\\\\') + '"',
+        r'q7:"[^"]*"',
+        f'q7:"{case_info["q7"]["answer"]}"',
         content
     )
     
@@ -385,6 +372,7 @@ def update_file(filename, case_info):
     else:
         print(f"⚠️  No changes: {filename}")
         return False
+
 
 # Process all files
 updated = 0
