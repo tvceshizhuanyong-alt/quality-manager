@@ -250,14 +250,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 测量变异小于公差带</span></label>
 </div>
 
-<div class="question" data-id="q6" data-answer="A" data-type="case">
-<div class="question-header">第7题：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q6" data-answer="测量系统不稳定会导致数据失真，必须先把量得准不准的问题解决，再谈过程改进。" data-keywords="数据失真,测量系统,量具,MSA,校准,过程改进" data-type="case">
+<div class="question-header">第7题：测量系统不稳定会导致什么后果？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="A" data-type="case">
-<div class="question-header">第8题：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q7" data-answer="MSA的核心是判断测量系统是否适用，而不只是看量具外观是否正常，要评估偏倚、重复性、再现性等指标。" data-keywords="测量系统,适用,量具,MSA,偏倚,重复性,再现性" data-type="case">
+<div class="question-header">第8题：MSA的核心是什么？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
@@ -278,8 +278,8 @@ q2:"测量系统必须稳定、受控，数据才可信。",
 q3:"再现性通常反映不同测量者之间的差异。",
 q4:"这些都是MSA常见评价指标。",
 q5:"这些都是测量系统应满足的要求。",
-q6:"测量系统不稳定会导致数据失真，必须先把“量得准不准”解决。",
-q7:"MSA的核心是判断测量系统是否适用，而不只是看量具外观是否正常。"
+q6:"测量系统不稳定会导致数据失真，必须先把量得准不准的问题解决，再谈过程改进。",
+q7:"MSA的核心是判断测量系统是否适用，而不只是看量具外观是否正常，要评估偏倚、重复性、再现性等指标。"
 };
 var questions=[
 {id:'q0',text:"MSA 的核心目的之一是判断什么？
@@ -312,8 +312,8 @@ var questions=[
 - B. 分辨力和灵敏度足够
 - C. 测量变异小于制造过程变异
 - D. 测量变异小于公差带"},
-{id:'q6',text:'案例题'},
-{id:'q7',text:'案例题'}
+{id:'q6',text:'测量系统不稳定会导致什么后果？',type:'case'},
+{id:'q7',text:'MSA的核心是什么？',type:'case'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -323,24 +323,50 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      
+      if(q.type==='case'){
+        // 案例题：关键词匹配判分
+        const textarea=box.querySelector('.case-answer');
+        const userAnswer=textarea?textarea.value.trim():'';
+        const keywords=box.getAttribute('data-keywords')||'';
+        const keywordList=keywords.split(',').filter(k=>k.trim());
+        let matchCount=0;
+        keywordList.forEach(kw=>{
+          if(userAnswer.includes(kw.trim())) matchCount++;
+        });
+        const matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        const passed=matchRate>=0.5; // 至少匹配50%关键词
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'✅':'❌')+' 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>关键词匹配：</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        // 选择题：原有逻辑
+        const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+        const ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    // 计算总分（选择题+案例题）
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+totalQuestions+(score===totalQuestions?' 🎉 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错，请刷新页面重试：'+e.message);
   }

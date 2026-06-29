@@ -226,14 +226,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 目标一经发布无需再调整</span></label>
 </div>
 
-<div class="question" data-id="q6" data-answer="CASE7" data-type="case">
-<div class="question-header">第7题（案例）：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q6" data-answer="质量目标必须可量化、可跟踪、可分解，否则只能算口号，不能算管理目标。" data-keywords="质量目标,量化,可测量,分解,跟踪,考核,指标" data-type="case">
+<div class="question-header">第7题（案例）：某企业质量目标仅为口号式表述，请分析其问题并提出改进建议。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="CASE8" data-type="case">
-<div class="question-header">第8题（案例）：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q7" data-answer="质量目标管理的关键是动态跟踪和及时纠偏，不能只在年末总结。" data-keywords="质量目标,动态跟踪,纠偏,定期监控,持续改进,考核" data-type="case">
+<div class="question-header">第8题（案例）：如何确保质量目标在全年得到有效执行？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
@@ -264,8 +264,8 @@ var questions=[
 {id:'q3',text:"质量目标制定时应优先考虑什么？"},
 {id:'q4',text:"制定质量目标时，通常应考虑哪些要素？"},
 {id:'q5',text:"质量目标管理中，哪些做法更合理？"},
-{id:'q6',text:""},
-{id:'q7',text:""}
+{id:'q6',text:"某企业质量目标仅为口号式表述，请分析其问题并提出改进建议。",type:'case'},
+{id:'q7',text:"如何确保质量目标在全年得到有效执行？",type:'case'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -275,15 +275,28 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
+      
       if(q.type==='case'){
+        // 案例题：关键词匹配判分
         const textarea=box.querySelector('.case-answer');
         const userAnswer=textarea?textarea.value.trim():'';
-        html+='<div class="result-card result-wrong">';
-        html+='<div style="font-weight:600;margin-bottom:6px">📝 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        const keywords=box.getAttribute('data-keywords')||'';
+        const keywordList=keywords.split(',').filter(k=>k.trim());
+        let matchCount=0;
+        keywordList.forEach(kw=>{
+          if(userAnswer.includes(kw.trim())) matchCount++;
+        });
+        const matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        const passed=matchRate>=0.5;
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'✅':'❌')+' 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
         html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>关键词匹配：</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
         html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
         html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
       } else {
+        // 选择题：原有逻辑
         const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
         const ok=checked===correct;
         if(ok)score++;
@@ -298,8 +311,8 @@ function submitQuiz(){
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    var totalChoice=questions.filter(q=>q.type!=='case').length;
-    if(scoreBar) scoreBar.textContent='选择题得分：'+score+' / '+totalChoice+(score===totalChoice?' 🎉 满分！':'');
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+totalQuestions+(score===totalQuestions?' 🎉 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}

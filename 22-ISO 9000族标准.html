@@ -250,14 +250,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 促进人员积极参与</span></label>
 </div>
 
-<div class="question" data-id="q6" data-answer="A" data-type="case">
-<div class="question-header">第7题：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q6" data-answer="ISO 9001强调质量目标与战略方向一致，并通过策划、资源配置和绩效评价确保目标落地。" data-keywords="质量目标,战略方向,策划,资源,绩效评价,落地,一致性" data-type="case">
+<div class="question-header">第7题：ISO 9001如何确保质量目标与战略方向一致？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="A" data-type="case">
-<div class="question-header">第8题：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q7" data-answer="体系失效常见通病是执行不到位、写做不一致，文件规定与实际操作脱节。" data-keywords="执行不到位,写做不一致,体系失效,通病,脱节,文件规定,实际操作" data-type="case">
+<div class="question-header">第8题：体系失效的常见通病是什么？请举例说明。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
@@ -278,8 +278,8 @@ q2:"ISO 9001:2015采用高阶结构，共10个章节。",
 q3:"组织环境指影响组织实现预期结果的内外部因素。",
 q4:"七项原则包括以顾客为关注焦点、领导作用、全员积极参与、过程方法、改进、循证决策、关系管理。",
 q5:"这些都是最高管理者在ISO 9001:2015中的职责要求。",
-q6:"ISO 9001强调质量目标与战略方向相容，并通过策划、资源和评价确保落地。",
-q7:"体系失效常见通病之一就是执行不到位、写做不一致。"
+q6:"ISO 9001强调质量目标与战略方向一致，并通过策划、资源配置和绩效评价确保目标落地。",
+q7:"体系失效常见通病是执行不到位、写做不一致，文件规定与实际操作脱节。"
 };
 var questions=[
 {id:'q0',text:"ISO 9001:2015 七项质量管理原则的理论基础是？
@@ -312,8 +312,8 @@ var questions=[
 - B. 将体系要求融入组织业务过程
 - C. 确保资源可用
 - D. 促进人员积极参与"},
-{id:'q6',text:'案例题'},
-{id:'q7',text:'案例题'}
+{id:'q6',text:'ISO 9001如何确保质量目标与战略方向一致？',type:'case'},
+{id:'q7',text:'体系失效的常见通病是什么？请举例说明。',type:'case'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -323,24 +323,50 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
-      const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
-      const ok=checked===correct;
-      if(ok)score++;
-      html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
-      html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
-      if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
-      else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
-      html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      
+      if(q.type==='case'){
+        // 案例题：关键词匹配判分
+        const textarea=box.querySelector('.case-answer');
+        const userAnswer=textarea?textarea.value.trim():'';
+        const keywords=box.getAttribute('data-keywords')||'';
+        const keywordList=keywords.split(',').filter(k=>k.trim());
+        let matchCount=0;
+        keywordList.forEach(kw=>{
+          if(userAnswer.includes(kw.trim())) matchCount++;
+        });
+        const matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        const passed=matchRate>=0.5; // 至少匹配50%关键词
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'✅':'❌')+' 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>关键词匹配：</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      } else {
+        // 选择题：原有逻辑
+        const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+        const ok=checked===correct;
+        if(ok)score++;
+        html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+        if(!ok)html+='<div>你的答案：<span style="color:#ef4444">'+(checked||'未作答')+'</span> | 正确答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
+        else html+='<div>答案：<span style="color:#16a34a;font-weight:600">'+correct+'</span> ✅</div>';
+        html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
+      }
     });
     var scoreBar=document.getElementById('scoreBar');
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 🎉 满分！':'');
+    // 计算总分（选择题+案例题）
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+totalQuestions+(score===totalQuestions?' 🎉 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
     document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true;});
+    document.querySelectorAll('.case-answer').forEach(function(ta){ta.disabled=true;});
   } catch(e) {
     alert('提交出错，请刷新页面重试：'+e.message);
   }

@@ -226,14 +226,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 标准化</span></label>
 </div>
 
-<div class="question" data-id="q6" data-answer="CASE7" data-type="case">
-<div class="question-header">第7题（案例）：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q6" data-answer="纠正措施必须进行根因分析，找到根本原因并采取措施防止再发生。" data-keywords="纠正措施,根因分析,原因调查,预防措施,再发防止,有效性验证" data-type="case">
+<div class="question-header">第7题（案例）：某企业反复出现同样的质量问题，请分析纠正措施实施中的问题。<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
 
-<div class="question" data-id="q7" data-answer="CASE8" data-type="case">
-<div class="question-header">第8题（案例）：<span class="badge badge-case">案例</span></div>
+<div class="question" data-id="q7" data-answer="只做返工没有根因治理，就很容易出现问题重复发生。" data-keywords="返工,根因治理,问题重复,纠正措施,根本原因,再发防止" data-type="case">
+<div class="question-header">第8题（案例）：只做返工不做根因分析会有什么后果？<span class="badge badge-case">案例</span></div>
 <textarea class="case-answer" placeholder="请输入你的答案（200字以内）..." rows="4" maxlength="200"></textarea>
 <div class="char-count">0/200</div>
 </div>
@@ -254,7 +254,7 @@ q2:"5Why常用于连续追问原因、逐层逼近根因，是纠正措施中的
 q3:"纠正措施的重点在于消除原因、预防再次发生，属于治本。",
 q4:"纠正措施的闭环不仅要验证根因消除，还要确认风险降低、文件更新、培训到位与标准化落地。",
 q5:"纠正措施要形成从根因分析到实施、验证和标准化的完整闭环。",
-q6:"",
+q6:"纠正措施必须进行根因分析，找到根本原因并采取措施防止再发生。",
 q7:"只做返工没有根因治理，就很容易出现问题重复发生。"
 };
 var questions=[
@@ -264,8 +264,8 @@ var questions=[
 {id:'q3',text:"纠正措施的核心是？"},
 {id:'q4',text:"纠正措施实施后应检查哪些内容？"},
 {id:'q5',text:"以下哪些属于纠正措施闭环的关键环节？"},
-{id:'q6',text:""},
-{id:'q7',text:""}
+{id:'q6',text:"某企业反复出现同样的质量问题，请分析纠正措施实施中的问题。",type:'case'},
+{id:'q7',text:"只做返工不做根因分析会有什么后果？",type:'case'}
 ];
 // 改进的提交函数
 function submitQuiz(){
@@ -275,15 +275,28 @@ function submitQuiz(){
       const box=document.querySelector('.question[data-id="'+q.id+'"]');
       if(!box) return;
       const correct=box.getAttribute('data-answer');
+      
       if(q.type==='case'){
+        // 案例题：关键词匹配判分
         const textarea=box.querySelector('.case-answer');
         const userAnswer=textarea?textarea.value.trim():'';
-        html+='<div class="result-card result-wrong">';
-        html+='<div style="font-weight:600;margin-bottom:6px">📝 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
+        const keywords=box.getAttribute('data-keywords')||'';
+        const keywordList=keywords.split(',').filter(k=>k.trim());
+        let matchCount=0;
+        keywordList.forEach(kw=>{
+          if(userAnswer.includes(kw.trim())) matchCount++;
+        });
+        const matchRate=keywordList.length>0?matchCount/keywordList.length:0;
+        const passed=matchRate>=0.5;
+        if(passed) score++;
+        html+='<div class="result-card '+(passed?'result-correct':'result-wrong')+'">';
+        html+='<div style="font-weight:600;margin-bottom:6px">'+(passed?'✅':'❌')+' 第'+(idx+1)+'题（案例）：'+q.text+'</div>';
         html+='<div style="margin-bottom:6px"><strong>你的答案：</strong><span style="color:#555">'+(userAnswer||'未作答')+'</span></div>';
+        html+='<div style="margin-bottom:6px"><strong>关键词匹配：</strong><span style="color:'+(passed?'#16a34a':'#ef4444')+';font-weight:600">'+matchCount+'/'+keywordList.length+' ('+Math.round(matchRate*100)+'%)</span></div>';
         html+='<div style="margin-bottom:6px"><strong>参考答案：</strong><span style="color:#16a34a;font-weight:600">'+correct+'</span></div>';
         html+='<div style="margin-top:6px;color:#555;font-size:13px">'+(explanations[q.id]||'')+'</div></div>';
       } else {
+        // 选择题：原有逻辑
         const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
         const ok=checked===correct;
         if(ok)score++;
@@ -298,8 +311,8 @@ function submitQuiz(){
     var resultDetails=document.getElementById('resultDetails');
     var resultDiv=document.getElementById('result');
     var submitBtn=document.getElementById('submitBtn');
-    var totalChoice=questions.filter(q=>q.type!=='case').length;
-    if(scoreBar) scoreBar.textContent='选择题得分：'+score+' / '+totalChoice+(score===totalChoice?' 🎉 满分！':'');
+    var totalQuestions=questions.length;
+    if(scoreBar) scoreBar.textContent='得分：'+score+' / '+totalQuestions+(score===totalQuestions?' 🎉 满分！':'');
     if(resultDetails) resultDetails.innerHTML=html;
     if(resultDiv){resultDiv.style.display='block';setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth'})},200);}
     if(submitBtn){submitBtn.textContent='已提交 ✓';submitBtn.disabled=true;submitBtn.style.opacity='0.5';submitBtn.style.cursor='not-allowed';}
