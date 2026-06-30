@@ -167,17 +167,17 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <tr><td><span class="hl orange">内部故障成本</span></td><td>交付<span style="text-decoration:underline">前</span>发现不合格的损失</td><td>返工返修费、废品损失、复检费、停线损失</td></tr>
 <tr><td><span class="hl red">外部故障成本</span></td><td>交付<span style="text-decoration:underline">后</span>发现不合格的损失</td><td>维修差旅费、客户索赔费、退货运输费、售后客服人工成本</td></tr>
 </table>
-
-<div class="callout">核心逻辑：<span class="hl green">预防投入</span>↑ → <span class="hl orange">内部故障</span>↓ → <span class="hl red">外部故障</span>↓↓（损失逐级放大）</div>
-
-
-<div class="deep-dive-inline">
-<h4>📐 原理深挖：性能 vs 可靠性——素质与体质的类比</h4>
+<h3>性能 vs 可靠性：素质与体质的类比</h3>
 <p>手册中有一个精妙的比喻：<strong>性能指标体现"素质"，可靠性指标体现"体质"</strong>。一个人可以才华横溢（性能优秀），但体弱多病（可靠性差），最终无法持续发挥价值。产品同理——功能再强大，如果经常故障，用户信任就会崩塌。</p>
-<div class="dd-formula">R(t) = P{产品在时间 t 内无故障完成规定功能}<br>可靠度 R(t) 是一个概率值，0 ≤ R(t) ≤ 1</div>
+
+<h3>可靠性的数学定义</h3>
+<div class="callout">R(t) = P{产品在时间 t 内无故障完成规定功能}，0 ≤ R(t) ≤ 1</div>
 <p>关键参数：<strong>MTBF</strong>（平均故障间隔时间）越大越好，<strong>MTTR</strong>（平均修复时间）越短越好。可用度 = MTBF/(MTBF+MTTR)。</p>
-</div>
-</section>
+
+<h3>可靠性四步法的逻辑链</h3>
+<p>第一步：可靠性定义——明确"在什么条件下、多长时间内、完成什么功能"算可靠。第二步：可靠性分配——将系统级指标分解到子系统/零部件。第三步：可靠性预计——用历史数据/手册估算各单元的可靠度。第四步：可靠性评审——验证是否达标，不达标则改进设计。</p>
+
+<div class="callout">核心逻辑：<span class="hl green">预防投入</span>↑ → <span class="hl orange">内部故障</span>↓ → <span class="hl red">外部故障</span>↓↓（损失逐级放大）</div></section>
 
 <section class="panel" id="s2">
 <div class="section-num">2.1.2</div>
@@ -191,13 +191,8 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">⚠️ 考试高频陷阱：题目常把"来料检验费"混在预防成本选项中，注意甄别！</div>
-
-
-<div class="deep-dive-inline">
-<h4>🎯 考试技巧：如何避开陷阱</h4>
-<p>这类题目的出题逻辑是<strong>混淆相似概念</strong>。应对策略：①回到定义本身，抓住关键词；②用"交付前后"区分内部/外部故障；③用"预防 vs 鉴定"的目的区分（预防是防止发生，鉴定是评定是否合格）。</p>
-</div>
-</section>
+<h3>传音业务映射</h3>
+<p>传音手机在非洲市场面临高温、高湿、多尘的极端环境。定义可靠性目标（如 MTBF≥18 个月）→ 对关键元器件进行可靠性分配 → 加速寿命试验（高温高湿老化）验证 → 根据试验结果优化散热设计和密封工艺。这就是为什么传音手机能在非洲市场赢得"耐用"口碑。</p></section>
 
 <section class="panel" id="s3">
 <div class="section-num">2.1.3</div>
@@ -210,18 +205,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <div class="card"><h4>④ 供应商分摊</h4><p>与零部件供应商签订质量赔付协议，分摊不良退货损失</p></div>
 </div>
 
-<div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
-
-
-<div class="deep-dive-inline">
-<h4>🌍 传音业务映射</h4>
-<div class="dd-example">
-<strong>场景：</strong>传音手机在非洲/南亚市场面临高温、高湿、多尘的极端环境，外部故障成本远高于国内——维修需跨国差旅、物流周期长、品牌信任一旦损失难以恢复。<br><br>
-<strong>应用：</strong>在研发阶段投入 DFMEA 评审（预防成本）→ 产线增加关键工位专检（鉴定成本）→ 外部故障成本（维修差旅 + 索赔）大幅下降。这就是"1-10-100 法则"在跨国制造中的实战体现。<br><br>
-<strong>数据驱动：</strong>建立全球售后数据看板，按区域/机型/故障类型统计外部故障成本，反向指导下一轮预防资源投放。
-</div>
-</div>
-</section>
+<div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div></section>
 
 
 <section class="panel quiz-section" id="quiz">
