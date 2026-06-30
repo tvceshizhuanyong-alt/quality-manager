@@ -105,6 +105,15 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
 .dd-example strong{color:#b45309}
 
+
+/* 原理深挖（inline 版本） */
+.deep-dive-inline{border-left:3px solid var(--purple);background:linear-gradient(135deg,#faf5ff,#f5f3ff);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0}
+.deep-dive-inline h4{font-size:15px;font-weight:700;color:var(--purple);margin:0 0 8px;display:flex;align-items:center;gap:6px}
+.deep-dive-inline p{margin:4px 0 8px;font-size:14px;color:#374151;line-height:1.75}
+.deep-dive-inline .dd-formula{background:#fff;border:1px solid #e9d5ff;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;color:#5b21b6;font-weight:600;text-align:center;line-height:1.7}
+.deep-dive-inline .dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
+.deep-dive-inline .dd-example strong{color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
@@ -124,9 +133,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <nav class="top-links">
 <a href="#s1">质量成本分类</a>
 <a href="#s2">杠杆关系</a>
-<a href="#s3">案例应用</a>
-<a href="#deep-dive">原理深挖</a>
-<a href="#quiz">练习题</a>
+<a href="#s3">案例应用</a><a href="#quiz">练习题</a>
 </nav>
 </div>
 </header>
@@ -162,6 +169,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </table>
 
 <div class="callout">核心逻辑：<span class="hl green">预防投入</span>↑ → <span class="hl orange">内部故障</span>↓ → <span class="hl red">外部故障</span>↓↓（损失逐级放大）</div>
+
+
+<div class="deep-dive-inline">
+<h4> 原理深挖：原则 vs 规则的本质区别</h4>
+<p>七项原则并非凭空产生，而是 ISO/TC176 的各国专家<strong>总结了戴明、朱兰、克劳斯比等大师数十年实践的共性</strong>，提炼出"最大公约数"。</p>
+<p><strong>规则（Rule）</strong>告诉你"必须做什么"（可审核），<strong>原则（Principle）</strong>告诉你"为什么这样做"。理解原则，才能在规则未覆盖的场景做出正确判断。</p>
+<div class="dd-formula">领导确立方向 → 全员参与执行 → 过程方法保障效率<br>→ 循证决策纠偏 → 关系管理扩展价值<br>顾客是起点和终点，改进是永恒动力</div>
+</div>
 </section>
 
 <section class="panel" id="s2">
@@ -176,6 +191,12 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">⚠️ 考试高频陷阱：题目常把"来料检验费"混在预防成本选项中，注意甄别！</div>
+
+
+<div class="deep-dive-inline">
+<h4>🎯 考试技巧：如何避开陷阱</h4>
+<p>这类题目的出题逻辑是<strong>混淆相似概念</strong>。应对策略：①回到定义本身，抓住关键词；②用"交付前后"区分内部/外部故障；③用"预防 vs 鉴定"的目的区分（预防是防止发生，鉴定是评定是否合格）。</p>
+</div>
 </section>
 
 <section class="panel" id="s3">
@@ -190,30 +211,18 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
-</section>
 
 
-<section class="panel" id="deep-dive">
-<div class="deep-dive">
-<div class="deep-dive-title">📐 原理深挖：七项原则为什么是"原则"而非"规则"？</div>
-<div class="dd-block">
-<h4><span class="dd-icon">📜</span> 历史溯源：从戴明十四点到ISO七项原则</h4>
-<p>七项原则并非凭空产生。1950年代戴明提出"十四条管理准则"，朱兰提出"质量三部曲"，克劳斯比提出"零缺陷十四步"。ISO/TC176的各国专家<strong>总结了这些大师数十年实践的共性</strong>，提炼出七项"最大公约数"——它们不是规定动作，而是底层逻辑。</p>
-</div>
-<div class="dd-block">
-<h4><span class="dd-icon">🧭</span> 原则 vs 规则的本质区别</h4>
-<p>规则（Rule）告诉你"必须做什么"，原则（Principle）告诉你"为什么这样做"。ISO 9001的条款是"规则"（可审核），而七项原则是"规则背后的道理"。理解原则，才能在规则未覆盖的场景做出正确判断。</p>
-</div>
-<div class="dd-block">
-<h4><span class="dd-icon">🔗</span> 七项原则的内在逻辑链</h4>
-<p><div class="dd-formula">领导确立方向 → 全员参与执行 → 过程方法保障效率<br>→ 循证决策纠偏 → 关系管理扩展价值<br><br>顾客是起点和终点，改进是永恒动力</div>七项原则不是并列的，而是形成了一条<strong>"领导驱动→系统运行→持续进化"</strong>的因果链。</p>
-</div>
-<div class="dd-block">
-<h4><span class="dd-icon">🌍</span> 传音业务映射</h4>
-<p><div class="dd-example"><strong>场景：</strong>传音在非洲多国运营，不同国家的法规、文化、供应链差异巨大。<br><br><strong>应用：</strong>"关系管理"原则要求我们不仅管理直接供应商，还要管理当地社区关系、政府关系。"以顾客为关注焦点"要求理解非洲用户的独特需求（深肤色拍照、多卡多待、大电池续航），而非简单套用国内标准。</div></p>
+<div class="deep-dive-inline">
+<h4>🌍 传音业务映射</h4>
+<div class="dd-example">
+<strong>场景：</strong>传音手机在非洲/南亚市场面临高温、高湿、多尘的极端环境，外部故障成本远高于国内——维修需跨国差旅、物流周期长、品牌信任一旦损失难以恢复。<br><br>
+<strong>应用：</strong>在研发阶段投入 DFMEA 评审（预防成本）→ 产线增加关键工位专检（鉴定成本）→ 外部故障成本（维修差旅 + 索赔）大幅下降。这就是"1-10-100 法则"在跨国制造中的实战体现。<br><br>
+<strong>数据驱动：</strong>建立全球售后数据看板，按区域/机型/故障类型统计外部故障成本，反向指导下一轮预防资源投放。
 </div>
 </div>
 </section>
+
 
 <section class="panel quiz-section" id="quiz">
 <div class="quiz-title">练习题</div>

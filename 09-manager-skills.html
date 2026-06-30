@@ -105,6 +105,15 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
 .dd-example strong{color:#b45309}
 
+
+/* 原理深挖（inline 版本） */
+.deep-dive-inline{border-left:3px solid var(--purple);background:linear-gradient(135deg,#faf5ff,#f5f3ff);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0}
+.deep-dive-inline h4{font-size:15px;font-weight:700;color:var(--purple);margin:0 0 8px;display:flex;align-items:center;gap:6px}
+.deep-dive-inline p{margin:4px 0 8px;font-size:14px;color:#374151;line-height:1.75}
+.deep-dive-inline .dd-formula{background:#fff;border:1px solid #e9d5ff;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;color:#5b21b6;font-weight:600;text-align:center;line-height:1.7}
+.deep-dive-inline .dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
+.deep-dive-inline .dd-example strong{color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
@@ -124,9 +133,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <nav class="top-links">
 <a href="#s1">质量成本分类</a>
 <a href="#s2">杠杆关系</a>
-<a href="#s3">案例应用</a>
-<a href="#deep-dive">原理深挖</a>
-<a href="#quiz">练习题</a>
+<a href="#s3">案例应用</a><a href="#quiz">练习题</a>
 </nav>
 </div>
 </header>
@@ -162,6 +169,14 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </table>
 
 <div class="callout">核心逻辑：<span class="hl green">预防投入</span>↑ → <span class="hl orange">内部故障</span>↓ → <span class="hl red">外部故障</span>↓↓（损失逐级放大）</div>
+
+
+<div class="deep-dive-inline">
+<h4> 原理深挖：罗伯特·卡茨的三技能模型（1970）</h4>
+<p>哈佛教授卡茨提出管理者需要三种技能：<strong>技术技能</strong>（做事的能力）、<strong>人际技能</strong>（与人合作的能力）、<strong>概念技能</strong>（全局思考的能力）。关键发现：<strong>不同层级对三种技能的需求比例不同</strong>。</p>
+<div class="dd-formula">基层管理者：技术技能 60% | 人际技能 30% | 概念技能 10%<br>中层管理者：技术技能 30% | 人际技能 40% | 概念技能 30%<br>高层管理者：技术技能 10% | 人际技能 30% | 概念技能 60%</div>
+<p>这个模型解释了为什么"优秀工程师不一定能当好经理"——技术能力强但人际/概念技能弱，无法胜任管理岗位。</p>
+</div>
 </section>
 
 <section class="panel" id="s2">
@@ -176,6 +191,12 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">⚠️ 考试高频陷阱：题目常把"来料检验费"混在预防成本选项中，注意甄别！</div>
+
+
+<div class="deep-dive-inline">
+<h4>🎯 考试技巧：如何避开陷阱</h4>
+<p>这类题目的出题逻辑是<strong>混淆相似概念</strong>。应对策略：①回到定义本身，抓住关键词；②用"交付前后"区分内部/外部故障；③用"预防 vs 鉴定"的目的区分（预防是防止发生，鉴定是评定是否合格）。</p>
+</div>
 </section>
 
 <section class="panel" id="s3">
@@ -190,30 +211,18 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
-</section>
 
 
-<section class="panel" id="deep-dive">
-<div class="deep-dive">
-<div class="deep-dive-title">📐 原理深挖：管理者技能为什么是"三维度"而非"单一能力"？</div>
-<div class="dd-block">
-<h4><span class="dd-icon">📜</span> 罗伯特·卡茨的三技能模型（1970）</h4>
-<p>哈佛教授卡茨提出管理者需要三种技能：<strong>技术技能</strong>（做事的能力）、<strong>人际技能</strong>（与人合作的能力）、<strong>概念技能</strong>（全局思考的能力）。关键发现：<strong>不同层级对三种技能的需求比例不同</strong>。</p>
-</div>
-<div class="dd-block">
-<h4><span class="dd-icon">📊</span> 层级-技能矩阵</h4>
-<p><div class="dd-formula">基层管理者：技术技能 60% | 人际技能 30% | 概念技能 10%<br>中层管理者：技术技能 30% | 人际技能 40% | 概念技能 30%<br>高层管理者：技术技能 10% | 人际技能 30% | 概念技能 60%</div><p>这个模型解释了为什么"优秀工程师不一定能当好经理"——技术能力强但人际/概念技能弱，无法胜任管理岗位。</p></p>
-</div>
-<div class="dd-block">
-<h4><span class="dd-icon">🔗</span> 跨知识点关联</h4>
-<p><div class="dd-link"><strong>与领导作用的关系：</strong>领导作用要求高层管理者具备强概念技能（战略思维），同时需要人际技能来激励全员。<br><br><strong>与沟通的关系：</strong>人际技能的核心载体就是沟通能力。<br><br><strong>与人力资源的关系：</strong>人员选拔时应根据岗位层级匹配技能要求，而非一味追求技术能力。</div></p>
-</div>
-<div class="dd-block">
-<h4><span class="dd-icon">🌍</span> 传音业务映射</h4>
-<p><div class="dd-example"><strong>场景：</strong>传音质量经理需要管理跨文化团队（中国+非洲+印度）。<br><br><strong>应用：</strong>技术技能——懂质量工具（SPC、FMEA等）；人际技能——跨文化沟通、冲突调解、团队激励；概念技能——理解质量战略如何支撑公司全球化目标。三者缺一不可。</div></p>
+<div class="deep-dive-inline">
+<h4>🌍 传音业务映射</h4>
+<div class="dd-example">
+<strong>场景：</strong>传音手机在非洲/南亚市场面临高温、高湿、多尘的极端环境，外部故障成本远高于国内——维修需跨国差旅、物流周期长、品牌信任一旦损失难以恢复。<br><br>
+<strong>应用：</strong>在研发阶段投入 DFMEA 评审（预防成本）→ 产线增加关键工位专检（鉴定成本）→ 外部故障成本（维修差旅 + 索赔）大幅下降。这就是"1-10-100 法则"在跨国制造中的实战体现。<br><br>
+<strong>数据驱动：</strong>建立全球售后数据看板，按区域/机型/故障类型统计外部故障成本，反向指导下一轮预防资源投放。
 </div>
 </div>
 </section>
+
 
 <section class="panel quiz-section" id="quiz">
 <div class="quiz-title">练习题</div>
