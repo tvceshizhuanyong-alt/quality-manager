@@ -90,10 +90,26 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
 .badge-case{background:#fef3c7;color:#b45309}
 
+
+/* 原理深挖 */
+.deep-dive{border-left:4px solid var(--purple);background:linear-gradient(135deg,#faf5ff,#f5f3ff);border-radius:0 var(--radius) var(--radius) 0;padding:24px 28px;margin:16px 0}
+.deep-dive-title{font-size:18px;font-weight:800;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.dd-block{margin-bottom:18px}
+.dd-block:last-child{margin-bottom:0}
+.dd-block h4{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 6px;display:flex;align-items:center;gap:6px}
+.dd-block h4 .dd-icon{font-size:16px}
+.dd-block p{margin:4px 0 8px;font-size:14px;color:#374151;line-height:1.75}
+.dd-formula{background:#fff;border:1px solid #e9d5ff;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:14px;color:#5b21b6;font-weight:600;text-align:center;line-height:1.8}
+.dd-link{background:#fff;border:1px solid #c4b5fd;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#4c1d95;line-height:1.7}
+.dd-link strong{color:var(--purple)}
+.dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
+.dd-example strong{color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
 
+@media(max-width:900px){.deep-dive{padding:18px 16px}}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.top-links{display:none}}
 </style>
 </head>
@@ -109,6 +125,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <a href="#s1">质量成本分类</a>
 <a href="#s2">杠杆关系</a>
 <a href="#s3">案例应用</a>
+<a href="#deep-dive">原理深挖</a>
 <a href="#quiz">练习题</a>
 </nav>
 </div>
@@ -173,6 +190,29 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
+</section>
+
+
+<section class="panel" id="deep-dive">
+<div class="deep-dive">
+<div class="deep-dive-title">📐 原理深挖：纠正和纠正措施的区别为什么如此重要？</div>
+<div class="dd-block">
+<h4><span class="dd-icon">📜</span> ISO 9000的严格定义</h4>
+<p><div class="dd-formula">纠正（Correction）= 消除已发现的不合格（治标）<br>纠正措施（Corrective Action）= 消除不合格的原因，防止再发生（治本）</div><p>这个区分是ISO 9001:2015的核心要求之一。<strong>只做纠正不做纠正措施，等于"灭火不防火"</strong>——火灭了但隐患还在，下次还会着。</p></p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🔥</span> 为什么企业总停留在"纠正"层面？</h4>
+<p>三个原因：<br>1. <strong>时间压力</strong>：客户在催、产线在停，先恢复生产再说<br>2. <strong>能力不足</strong>：根因分析需要专业工具（5Why、鱼骨图），不是人人都会<br>3. <strong>文化问题</strong>：追究原因可能被理解为"追究责任"，大家回避深挖<br><br>质量经理的核心价值之一，就是推动组织从"纠正"升级到"纠正措施"。</p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🔗</span> 跨知识点关联</h4>
+<p><div class="dd-link"><strong>与5Why的关系：</strong>5Why是连接"纠正"到"纠正措施"的桥梁——通过连续追问"为什么"，从表象深入到根因。<br><br><strong>与FMEA的关系：</strong>FMEA中识别的潜在原因，就是纠正措施应该针对的对象。<br><br><strong>与PDCA的关系：</strong>纠正是D（执行），纠正措施是A（处置/标准化）。</div></p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🌍</span> 传音业务映射</h4>
+<p><div class="dd-example"><strong>场景：</strong>客户投诉手机充电口松动。<br><br><strong>纠正（治标）：</strong>给客户换新机。<br><strong>纠正措施（治本）：</strong>分析发现充电口焊接温度偏低导致虚焊 → 调整回流焊温度曲线 → 增加推拉力测试频次 → 更新作业指导书 → 培训产线员工 → 验证3个月无复发。</div></p>
+</div>
+</div>
 </section>
 
 <section class="panel quiz-section" id="quiz">

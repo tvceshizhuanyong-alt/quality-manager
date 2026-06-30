@@ -90,10 +90,26 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
 .badge-case{background:#fef3c7;color:#b45309}
 
+
+/* 原理深挖 */
+.deep-dive{border-left:4px solid var(--purple);background:linear-gradient(135deg,#faf5ff,#f5f3ff);border-radius:0 var(--radius) var(--radius) 0;padding:24px 28px;margin:16px 0}
+.deep-dive-title{font-size:18px;font-weight:800;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.dd-block{margin-bottom:18px}
+.dd-block:last-child{margin-bottom:0}
+.dd-block h4{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 6px;display:flex;align-items:center;gap:6px}
+.dd-block h4 .dd-icon{font-size:16px}
+.dd-block p{margin:4px 0 8px;font-size:14px;color:#374151;line-height:1.75}
+.dd-formula{background:#fff;border:1px solid #e9d5ff;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:14px;color:#5b21b6;font-weight:600;text-align:center;line-height:1.8}
+.dd-link{background:#fff;border:1px solid #c4b5fd;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#4c1d95;line-height:1.7}
+.dd-link strong{color:var(--purple)}
+.dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
+.dd-example strong{color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
 
+@media(max-width:900px){.deep-dive{padding:18px 16px}}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.top-links{display:none}}
 </style>
 </head>
@@ -109,6 +125,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <a href="#s1">质量成本分类</a>
 <a href="#s2">杠杆关系</a>
 <a href="#s3">案例应用</a>
+<a href="#deep-dive">原理深挖</a>
 <a href="#quiz">练习题</a>
 </nav>
 </div>
@@ -173,6 +190,29 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
+</section>
+
+
+<section class="panel" id="deep-dive">
+<div class="deep-dive">
+<div class="deep-dive-title">📐 原理深挖：供应商管理为什么是"共赢"而非"博弈"？</div>
+<div class="dd-block">
+<h4><span class="dd-icon">📜</span> 从"价格博弈"到"价值共创"的范式转移</h4>
+<p>传统采购思维是<strong>"压价=降本"</strong>，但质量经理手册指出：供应商质量问题的根源往往是"价格压得太低，供应商无利可图，只能在质量上偷工减料"。现代供应商管理的核心是<strong>从博弈关系转向伙伴关系</strong>——通过技术辅导、长期合同、联合改进，实现双赢。</p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">📊</span> 供应商管理的"冰山模型"</h4>
+<p><div class="dd-formula">水面以上：价格、交期、合格率（可见指标）<br>水面以下：技术能力、管理体系、文化匹配度、改进意愿（隐性因素）</div><p>只看水面以上的指标，就像只看冰山一角。真正决定长期合作成败的，是水面以下的隐性因素。<strong>供应商审核（二方审核）的本质就是探测冰山以下的能力。</strong></p></p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🔗</span> 跨知识点关联</h4>
+<p><div class="dd-link"><strong>与质量成本的关系：</strong>供应商质量问题导致的外部故障成本，往往远超采购价差。供应商辅导费属于预防成本，是ROI最高的投入。<br><br><strong>与FMEA的关系：</strong>供应商DFMEA/PFMEA的评审是新品开发阶段的重要预防活动。<br><br><strong>与ISO 9001的关系：</strong>ISO 9001:2015第8.4条明确要求对外部提供的过程、产品和服务进行控制。</div></p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🌍</span> 传音业务映射</h4>
+<p><div class="dd-example"><strong>场景：</strong>传音在印度、非洲有多个本地化供应商，质量水平参差不齐。<br><br><strong>应用：</strong>建立供应商分级管理（A/B/C/D级）→ A级免检+联合改进，C级加严检验+定期辅导，D级限期整改或淘汰 → 每季度供应商绩效看板（合格率+交期+响应速度+改进配合度）→ 年度供应商大会表彰优秀、分享最佳实践。</div></p>
+</div>
+</div>
 </section>
 
 <section class="panel quiz-section" id="quiz">

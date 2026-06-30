@@ -90,10 +90,26 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 .char-count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
 .badge-case{background:#fef3c7;color:#b45309}
 
+
+/* 原理深挖 */
+.deep-dive{border-left:4px solid var(--purple);background:linear-gradient(135deg,#faf5ff,#f5f3ff);border-radius:0 var(--radius) var(--radius) 0;padding:24px 28px;margin:16px 0}
+.deep-dive-title{font-size:18px;font-weight:800;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.dd-block{margin-bottom:18px}
+.dd-block:last-child{margin-bottom:0}
+.dd-block h4{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 6px;display:flex;align-items:center;gap:6px}
+.dd-block h4 .dd-icon{font-size:16px}
+.dd-block p{margin:4px 0 8px;font-size:14px;color:#374151;line-height:1.75}
+.dd-formula{background:#fff;border:1px solid #e9d5ff;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:14px;color:#5b21b6;font-weight:600;text-align:center;line-height:1.8}
+.dd-link{background:#fff;border:1px solid #c4b5fd;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#4c1d95;line-height:1.7}
+.dd-link strong{color:var(--purple)}
+.dd-example{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:13px;color:#92400e;line-height:1.7}
+.dd-example strong{color:#b45309}
+
 /* Footer */
 .footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8}
 .footer .sign{font-size:13px;color:#64748b;margin-top:6px}
 
+@media(max-width:900px){.deep-dive{padding:18px 16px}}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.top-links{display:none}}
 </style>
 </head>
@@ -109,6 +125,7 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 <a href="#s1">质量成本分类</a>
 <a href="#s2">杠杆关系</a>
 <a href="#s3">案例应用</a>
+<a href="#deep-dive">原理深挖</a>
 <a href="#quiz">练习题</a>
 </nav>
 </div>
@@ -173,6 +190,29 @@ td{padding:10px 12px;border:1px solid var(--line);color:#334155}
 </div>
 
 <div class="callout warn">️ 答题要点：必须体现"预防→鉴定→故障"的递进逻辑，不能只答其中一类。</div>
+</section>
+
+
+<section class="panel" id="deep-dive">
+<div class="deep-dive">
+<div class="deep-dive-title">📐 原理深挖：可靠性为什么是产品的"体质"？</div>
+<div class="dd-block">
+<h4><span class="dd-icon">📜</span> 性能 vs 可靠性：素质与体质的类比</h4>
+<p>手册中有一个精妙的比喻：<strong>性能指标体现"素质"，可靠性指标体现"体质"</strong>。一个人可以才华横溢（性能优秀），但体弱多病（可靠性差），最终无法持续发挥价值。产品同理——功能再强大，如果经常故障，用户信任就会崩塌。</p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">📐</span> 可靠性的数学定义</h4>
+<p><div class="dd-formula">R(t) = P{产品在时间t内无故障完成规定功能}<br>可靠度R(t)是一个概率值，0 ≤ R(t) ≤ 1</div><p>关键参数：<strong>MTBF</strong>（平均故障间隔时间）越大越好，<strong>MTTR</strong>（平均修复时间）越短越好。可用度 = MTBF/(MTBF+MTTR)。</p></p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🔗</span> 可靠性四步法的逻辑链</h4>
+<p><div class="dd-link"><strong>第一步：可靠性定义</strong>——明确"在什么条件下、多长时间内、完成什么功能"算可靠<br><strong>第二步：可靠性分配</strong>——将系统级指标分解到子系统/零部件<br><strong>第三步：可靠性预计</strong>——用历史数据/手册估算各单元的可靠度<br><strong>第四步：可靠性评审</strong>——验证是否达标，不达标则改进设计</div></p>
+</div>
+<div class="dd-block">
+<h4><span class="dd-icon">🌍</span> 传音业务映射</h4>
+<p><div class="dd-example"><strong>场景：</strong>传音手机在非洲市场面临高温、高湿、多尘的极端环境。<br><br><strong>应用：</strong>定义可靠性目标（如MTBF≥18个月）→ 对关键元器件（电池、屏幕、主板）进行可靠性分配 → 加速寿命试验（高温高湿老化）验证 → 根据试验结果优化散热设计和密封工艺。这就是为什么传音手机能在非洲市场赢得"耐用"口碑。</div></p>
+</div>
+</div>
 </section>
 
 <section class="panel quiz-section" id="quiz">
